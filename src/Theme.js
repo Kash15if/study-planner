@@ -31,11 +31,16 @@ const darkTheme = createTheme({
       light: "#ff7961",
       main: "#f44336",
       dark: "#03DAC6",
-      contrastText: "#000",
+      contrastText: "#fff",
     },
     background: {
       paper: "#0D1B2A",
       default: "#0D1B2A",
+      contrastText: "#fff",
+    },
+    text: {
+      primary: "#fff",
+      secondary: "rgba(255, 255, 255, 0.7)",
     },
   },
 });
