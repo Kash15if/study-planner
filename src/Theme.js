@@ -2,7 +2,7 @@ import { createTheme } from "@mui/material/styles";
 
 const lightTheme = createTheme({
   palette: {
-    type: "light",
+    mode: "light",
     primary: {
       light: "#757ce8",
       main: "#42a5f5",
@@ -20,27 +20,33 @@ const lightTheme = createTheme({
 
 const darkTheme = createTheme({
   palette: {
-    type: "dark",
+    mode: "dark",
     primary: {
       light: "#BB86FC",
       main: "#BB86FC",
       dark: "#BB86FC",
-      contrastText: "#fff",
+      contrastText: "#BB86FC",
     },
     secondary: {
-      light: "#ff7961",
-      main: "#f44336",
+      light: "#03DAC6",
+      main: "#03DAC6",
       dark: "#03DAC6",
-      contrastText: "#fff",
+      contrastText: "#03DAC6",
     },
     background: {
       paper: "#0D1B2A",
       default: "#0D1B2A",
-      contrastText: "#fff",
+      contrastText: "#BB86FC",
     },
     text: {
-      primary: "#fff",
-      secondary: "rgba(255, 255, 255, 0.7)",
+      primary: "#BB86FC",
+      secondary: "#03DAC6",
+      disabled: "red",
+      icon: "#BB86FC",
+      divider: "#03DAC6",
+    },
+    action: {
+      active: "#fff",
     },
   },
 });

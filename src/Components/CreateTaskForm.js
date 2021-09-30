@@ -51,6 +51,7 @@ export default function HelperTextMisaligned() {
             // helperText="Please enter your topic"
             id="demo-helper-text-misaligned"
             label="Topic"
+            color="primary"
           />
         </Grid>
 
@@ -60,6 +61,7 @@ export default function HelperTextMisaligned() {
             fullWidth
             label="Description"
             variant="outlined"
+            color="primary"
           />
         </Grid>
 

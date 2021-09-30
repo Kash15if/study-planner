@@ -145,7 +145,7 @@ function ResponsiveDrawer(props) {
           </Drawer>
         </Hidden>
       </nav>
-      <main className={classes.content}>
+      <main className={classes.content} pt={6}>
         <CreateTaskForm />
       </main>
     </div>
