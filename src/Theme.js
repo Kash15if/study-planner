@@ -7,7 +7,7 @@ const lightTheme = createTheme({
       light: "#757ce8",
       main: "#42a5f5",
       dark: "#BB86FC",
-      contrastText: "#fff",
+      contrastText: "#BB86FC",
     },
     secondary: {
       light: "#ff7961",
@@ -45,7 +45,7 @@ const darkTheme = createTheme({
       divider: "#03DAC6",
     },
     action: {
-      active: "#fff",
+      active: "#BB86FC",
     },
   },
 });
