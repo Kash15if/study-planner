@@ -1,8 +1,9 @@
 import "./App.css";
 import { darkTheme } from "./Theme.js";
 import { ThemeProvider } from "@mui/material/styles";
-import Card from "./Components/CreateTaskForm";
+import CreateTaskForm from "./Components/CreateTaskForm";
 import { makeStyles } from "@mui/styles";
+import Card from "./CustomComponents/TaskCard";
 
 import Navbar from "./CustomComponents/NavBar";
 

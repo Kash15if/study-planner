@@ -23,7 +23,7 @@ export default function HelperTextMisaligned() {
   };
 
   return (
-    <Box textAlign="left" pt={1}>
+    <Box textAlign="left">
       <Grid container justifyContent="space-around" spacing={2}>
         <Grid item sm={7} xs={12}>
           <Typography variant="h5" mb={3}>
