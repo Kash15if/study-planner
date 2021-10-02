@@ -5,21 +5,11 @@ import Avatar from "@mui/material/Avatar";
 import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import EditIcon from "@mui/icons-material/Edit";
-import { makeStyles } from "@mui/styles";
-
-const useStyles = makeStyles(() => ({
-  title: {
-    color: "#03DAC6",
-  },
-}));
 
 export default function RecipeReviewCard() {
-  const classes = useStyles();
-
   return (
-    <Card sx={{ maxWidth: 345 }}>
+    <Card fullwidth>
       <CardHeader
-        className={classes.title}
         avatar={
           <Avatar sx={{ bgcolor: "#03DAC6" }} aria-label="recipe">
             R
@@ -30,8 +20,10 @@ export default function RecipeReviewCard() {
             <EditIcon />
           </IconButton>
         }
-        title="Front-End"
-        subheader="September 14, 2016"
+        title={<Typography color="secondary">Front ENd</Typography>}
+        subheader={
+          <Typography color="secondary">September 14, 2016</Typography>
+        }
       />
 
       <CardContent>
