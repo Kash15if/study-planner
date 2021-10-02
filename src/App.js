@@ -1,8 +1,6 @@
 import "./App.css";
-import { darkTheme, lightTheme } from "./Theme.js";
+import { darkTheme } from "./Theme.js";
 import { ThemeProvider } from "@mui/material/styles";
-import { Paper } from "@mui/material";
-import { Box } from "@mui/system";
 import Card from "./Components/CreateTaskForm";
 import { makeStyles } from "@mui/styles";
 
