@@ -2,14 +2,13 @@ import * as React from "react";
 import { DataGrid } from "@mui/x-data-grid";
 
 const columns = [
-  { field: "id", headerName: "ID", width: 70 },
-  { field: "firstName", headerName: "First name", width: 130 },
-  { field: "lastName", headerName: "Last name", width: 130 },
+  { field: "id", headerName: "ID" },
+  { field: "firstName", headerName: "First name" },
+  { field: "lastName", headerName: "Last name" },
   {
     field: "age",
     headerName: "Age",
     type: "number",
-    width: 90,
   },
   {
     field: "fullName",
@@ -45,6 +44,7 @@ export default function DataTable() {
         pageSize={5}
         rowsPerPageOptions={[5]}
         checkboxSelection
+        color="white"
       />
     </div>
   );

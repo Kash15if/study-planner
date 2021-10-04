@@ -25,13 +25,13 @@ const darkTheme = createTheme({
       light: "#0D1B2A",
       main: "#BB86FC",
       dark: "#BB86FC",
-      contrastText: "#0D1B2A",
+      contrastText: "#BB86FC",
     },
     secondary: {
       light: "#0D1B2A",
       main: "#03DAC6",
-      dark: "#0D1B2A",
-      contrastText: "#0D1B2A",
+      dark: "#03DAC6",
+      contrastText: "#03DAC6",
     },
     background: {
       paper: "#0D1B2A",
