@@ -8,6 +8,7 @@ import Card from "./CustomComponents/TaskCard";
 import Navbar from "./CustomComponents/NavBar";
 import CreateTaskForm from "./Components/CreateTaskForm";
 import Table from "./CustomComponents/SortableTable";
+import SideDrawerTask from "./Components/SideDrawerTask";
 
 const useStyles = makeStyles({
   root: {
@@ -33,8 +34,11 @@ function App() {
               <Route path="/users">
                 <Card />
               </Route>
-              <Route path="/2">
+              <Route path="/2A">
                 <Table />
+              </Route>
+              <Route path="/1A">
+                <SideDrawerTask />
               </Route>
             </Switch>
           </div>
