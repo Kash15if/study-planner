@@ -34,10 +34,10 @@ function App() {
               <Route path="/users">
                 <Card />
               </Route>
-              <Route path="/2A">
+              <Route path="/table">
                 <Table />
               </Route>
-              <Route path="/1A">
+              <Route path="/cardDets">
                 <SideDrawerTask />
               </Route>
             </Switch>
