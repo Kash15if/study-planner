@@ -9,7 +9,7 @@ import Navbar from "./CustomComponents/NavBar";
 import CreateTaskForm from "./Components/CreateTaskForm";
 import Table from "./CustomComponents/SortableTable";
 import SideDrawerTask from "./Components/SideDrawerTask";
-
+import DashboardCard from "./CustomComponents/DashboardCard";
 const useStyles = makeStyles({
   root: {
     display: "flex",
@@ -40,6 +40,10 @@ function App() {
               <Route path="/cardDets">
                 <SideDrawerTask />
               </Route>
+              <Route path="/DashboardCard">
+                <DashboardCard />
+              </Route>
+              DashboardCard
             </Switch>
           </div>
         </Router>
