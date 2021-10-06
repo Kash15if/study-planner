@@ -10,6 +10,9 @@ import CreateTaskForm from "./Components/CreateTaskForm";
 import Table from "./CustomComponents/SortableTable";
 import SideDrawerTask from "./Components/SideDrawerTask";
 import DashboardCard from "./CustomComponents/DashboardCard";
+import BarChart from "./CustomComponents/BarChart";
+import PieChart from "./CustomComponents/PieChart";
+
 const useStyles = makeStyles({
   root: {
     display: "flex",
@@ -43,7 +46,12 @@ function App() {
               <Route path="/DashboardCard">
                 <DashboardCard />
               </Route>
-              DashboardCard
+              <Route path="/BarChart">
+                <BarChart />
+              </Route>
+              <Route path="/PieChart">
+                <PieChart />
+              </Route>
             </Switch>
           </div>
         </Router>
