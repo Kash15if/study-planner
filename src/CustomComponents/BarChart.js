@@ -17,6 +17,9 @@ const BarChart = () => {
       options={{
         // Material design options
         backgroundColor: "#18314B",
+        hAxis: {
+          color: "#000",
+        },
         vAxis: {
           gridlines: {
             interval: 0,

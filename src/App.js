@@ -12,6 +12,7 @@ import SideDrawerTask from "./Components/SideDrawerTask";
 import DashboardCard from "./CustomComponents/DashboardCard";
 import BarChart from "./CustomComponents/BarChart";
 import PieChart from "./CustomComponents/PieChart";
+import CalenderView from "./Components/CalenderView";
 
 const useStyles = makeStyles({
   root: {
@@ -51,6 +52,9 @@ function App() {
               </Route>
               <Route path="/PieChart">
                 <PieChart />
+              </Route>
+              <Route path="/calender">
+                <CalenderView />
               </Route>
             </Switch>
           </div>
