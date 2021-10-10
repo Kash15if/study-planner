@@ -32,7 +32,7 @@ function App() {
             {/* A <Switch> looks through its children <Route>s and
             renders the first one that matches the current URL. */}
             <Switch fullwidth>
-              <Route path="/about">
+              <Route path="/dashboard">
                 <CreateTaskForm />
               </Route>
               <Route path="/users">
@@ -53,8 +53,11 @@ function App() {
               <Route path="/PieChart">
                 <PieChart />
               </Route>
+
               <Route path="/calender">
-                <CalenderView />
+                <div style={{ width: "80%" }}>
+                  <CalenderView />
+                </div>
               </Route>
             </Switch>
           </div>

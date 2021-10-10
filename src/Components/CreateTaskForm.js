@@ -98,7 +98,7 @@ export default function HelperTextMisaligned() {
             <Grid item sm={4} xs={10}></Grid>
 
             <Grid item sm={6} xs={10}>
-              <Button variant="contained" component="span" size="large">
+              <Button variant="outlined" component="span" size="large">
                 Add
               </Button>
             </Grid>
@@ -108,7 +108,7 @@ export default function HelperTextMisaligned() {
         <Grid item sm={6} xs={12} mt={6} p={2}>
           <Grid container justifyContent="space-around">
             <Grid item sm={4} xs={8}>
-              <Button variant="contained">Add subtasks +</Button>
+              <Button variant="outined ">Add subtasks +</Button>
             </Grid>
           </Grid>
 

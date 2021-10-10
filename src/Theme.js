@@ -25,7 +25,8 @@ const darkTheme = createTheme({
       light: "#0D1B2A",
       main: "#BB86FC",
       dark: "#BB86FC",
-      contrastText: "#BB86FC",
+      //to show value on button and all
+      contrastText: "#0D1B2A",
     },
     secondary: {
       light: "#0D1B2A",

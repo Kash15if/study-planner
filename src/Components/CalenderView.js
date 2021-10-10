@@ -8,7 +8,6 @@ export default class DemoApp extends React.Component {
     return (
       <Paper>
         <FullCalendar
-          style={{ with: "100%" }}
           plugins={[dayGridPlugin]}
           initialView="dayGridMonth"
           weekends={false}

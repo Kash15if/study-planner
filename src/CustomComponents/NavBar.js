@@ -15,47 +15,87 @@ import MailIcon from "@mui/icons-material/Mail";
 import MenuIcon from "@mui/icons-material/Menu";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
+import { Button } from "@mui/material";
+import { useHistory } from "react-router-dom";
 
 const drawerWidth = 240;
 
 function ResponsiveDrawer(props) {
   const { window } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
+  let history = useHistory();
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
   };
 
+  function handleClick(componentPath) {
+    console.log(componentPath);
+    history.push(componentPath);
+  }
+
   const drawer = (
     <div>
       <Toolbar />
       <Divider />
+
       <List>
-        {[
-          "Dashboard",
-          "All Tasks",
-          "Create New Task",
-          "Create New Subject",
-        ].map((text, index) => (
-          <ListItem button key={text}>
-            <ListItemIcon>
-              {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-            </ListItemIcon>
-            <ListItemText primary={text} />
-          </ListItem>
-        ))}
+        <ListItem button onClick={() => handleClick("/dashboard")}>
+          <ListItemIcon>
+            <InboxIcon />
+          </ListItemIcon>
+          <ListItemText primary="Dashboard" />
+        </ListItem>
       </List>
       <Divider />
+
       <List>
-        {["Predefined Tasks", "Archived Tasks", "more"].map((text, index) => (
-          <ListItem button key={text}>
+        {[
+          {
+            compName: "Predefined Tasks",
+            compPath: "/predefined",
+          },
+          { compName: "Archived Tasks", compPath: "/archived" },
+        ].map((text, index) => (
+          <ListItem
+            button
+            key={index}
+            onClick={() => handleClick(text.compPath)}
+          >
             <ListItemIcon>
               {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
             </ListItemIcon>
-            <ListItemText primary={text} />
+            <ListItemText primary={text.compName} />
           </ListItem>
         ))}
       </List>
+
+      <Divider />
+
+      <List>
+        {[
+          {
+            compName: "Create New Task",
+            compPath: "/createnewtask",
+          },
+          { compName: "Create New Subject", compPath: "/newSub" },
+          { compName: "more...", compPath: "/404" },
+        ].map((text, index) => (
+          <ListItem button key={index}>
+            <ListItemIcon>
+              {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+            </ListItemIcon>
+            <ListItemText
+              primary={text.compName}
+              onClick={() => handleClick(text.compPath)}
+            />
+          </ListItem>
+        ))}
+      </List>
+
+      <div style={{ textAlign: "center", marginTop: "40px" }}>
+        <Button variant="outlined">Log out</Button>
+      </div>
     </div>
   );
 
