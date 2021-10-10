@@ -12,9 +12,15 @@ const Dashboard = () => {
         <Cards></Cards>
         <Cards></Cards>
       </div>
-      <div className="graphSection"></div>
-      <div className="tableSection"></div>
-      <div className="calenderSection"></div>
+      <div className="graphSection">
+        <PieChart />
+      </div>
+      <div className="tableSection">
+        <CalenderView />
+      </div>
+      <div className="calenderSection">
+        <TaskTable />
+      </div>
     </div>
   );
 };
