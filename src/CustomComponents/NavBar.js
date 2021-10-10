@@ -78,7 +78,7 @@ function ResponsiveDrawer(props) {
             compName: "Create New Task",
             compPath: "/createnewtask",
           },
-          { compName: "Create New Subject", compPath: "/newSub" },
+          { compName: "Create New Subject", compPath: "/newsub" },
           { compName: "more...", compPath: "/404" },
         ].map((text, index) => (
           <ListItem button key={index}>

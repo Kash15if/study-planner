@@ -14,6 +14,10 @@ import BarChart from "./CustomComponents/BarChart";
 import PieChart from "./CustomComponents/PieChart";
 import CalenderView from "./Components/CalenderView";
 
+//All pages for routes
+import Dashboard from "./Pages/Dashboard";
+import NewSubject from "./Components/CreateNewSubject";
+
 const useStyles = makeStyles({
   root: {
     display: "flex",
@@ -33,12 +37,12 @@ function App() {
             renders the first one that matches the current URL. */}
             <Switch fullwidth>
               <Route path="/dashboard">
-                <CreateTaskForm />
+                <Dashboard />
               </Route>
-              <Route path="/users">
-                <Card />
+              <Route path="/newsub">
+                <NewSubject />
               </Route>
-              <Route path="/table">
+              <Route path="/newsub">
                 <Table />
               </Route>
               <Route path="/cardDets">
@@ -58,6 +62,10 @@ function App() {
                 <div style={{ width: "80%" }}>
                   <CalenderView />
                 </div>
+              </Route>
+
+              <Route path="*">
+                <BarChart />
               </Route>
             </Switch>
           </div>
