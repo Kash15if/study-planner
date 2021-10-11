@@ -17,10 +17,12 @@ import CalenderView from "./Components/CalenderView";
 //All pages for routes
 import Dashboard from "./Pages/Dashboard";
 import NewSubject from "./Components/CreateNewSubject";
+import ErrorPage from "./Pages/404";
 
 const useStyles = makeStyles({
   root: {
     display: "flex",
+    paddingRight: "0px",
   },
 });
 
@@ -65,7 +67,7 @@ function App() {
               </Route>
 
               <Route path="*">
-                <BarChart />
+                <ErrorPage />
               </Route>
             </Switch>
           </div>
