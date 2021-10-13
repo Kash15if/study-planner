@@ -6,8 +6,8 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 import Navbar from "./CustomComponents/NavBar";
 import ArchivedTask from "./Pages/ArchivedTasks";
-import DashboardCard from "./CustomComponents/DashboardCard";
 import PredefinedTask from "./Pages/PredefinedTasks";
+import CreateNewTask from "./Pages/CreateTask";
 import BarChart from "./CustomComponents/BarChart";
 import PieChart from "./CustomComponents/PieChart";
 import CalenderView from "./Components/CalenderView";
@@ -52,8 +52,8 @@ function App() {
                 <Route path="/predefined">
                   <PredefinedTask />
                 </Route>
-                <Route path="/DashboardCard">
-                  <DashboardCard />
+                <Route path="/createnewtask">
+                  <CreateNewTask />
                 </Route>
                 <Route path="/BarChart">
                   <BarChart />

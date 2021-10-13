@@ -11,7 +11,6 @@ import AdapterDateFns from "@mui/lab/AdapterDateFns";
 import LocalizationProvider from "@mui/lab/LocalizationProvider";
 import MobileDatePicker from "@mui/lab/MobileDatePicker";
 
-import SubTaskAcc from "../CustomComponents/SubTasksAccordian";
 import { Typography } from "@mui/material";
 
 export default function HelperTextMisaligned() {
@@ -109,30 +108,6 @@ export default function HelperTextMisaligned() {
           <Grid container justifyContent="space-around">
             <Grid item sm={4} xs={8}>
               <Button variant="outined ">Add subtasks +</Button>
-            </Grid>
-          </Grid>
-
-          <Grid container justifyContent="space-around" spacing={1} mt={3}>
-            <Grid item xs={12}>
-              <SubTaskAcc />
-            </Grid>
-            <Grid item xs={12}>
-              <SubTaskAcc />
-            </Grid>
-            <Grid item xs={12}>
-              <SubTaskAcc />
-            </Grid>
-            <Grid item xs={12}>
-              <SubTaskAcc />
-            </Grid>
-            <Grid item xs={12}>
-              <SubTaskAcc />
-            </Grid>
-            <Grid item xs={12}>
-              <SubTaskAcc />
-            </Grid>
-            <Grid item xs={12}>
-              <SubTaskAcc />
             </Grid>
           </Grid>
         </Grid>
