@@ -6,8 +6,8 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 import Navbar from "./CustomComponents/NavBar";
 import ArchivedTask from "./Pages/ArchivedTasks";
-import SideDrawerTask from "./Components/SideDrawerTask";
 import DashboardCard from "./CustomComponents/DashboardCard";
+import PredefinedTask from "./Pages/PredefinedTasks";
 import BarChart from "./CustomComponents/BarChart";
 import PieChart from "./CustomComponents/PieChart";
 import CalenderView from "./Components/CalenderView";
@@ -49,8 +49,8 @@ function App() {
                 <Route path="/newsub">
                   <NewSubject />
                 </Route>
-                <Route path="/cardDets">
-                  <SideDrawerTask />
+                <Route path="/predefined">
+                  <PredefinedTask />
                 </Route>
                 <Route path="/DashboardCard">
                   <DashboardCard />

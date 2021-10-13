@@ -9,7 +9,7 @@ const Dashboard = () => {
     <div>
       <Grid container spacing={2} mb={5}>
         <Grid item sm={3} xs={12}>
-          <Cards></Cards>
+          <Cards color="pink"></Cards>
         </Grid>
         <Grid item sm={3} xs={12}>
           <Cards></Cards>

@@ -13,7 +13,7 @@ export default function MediaControlCard() {
         py: "5px",
         borderRadius: 1,
         bgcolor: "background.paper",
-        color: "text.secondary",
+        color: "#fbc02d",
       }}
     >
       <Box
@@ -22,7 +22,6 @@ export default function MediaControlCard() {
           flexDirection: "column",
           m: "10px",
           px: "30px",
-          borderRadius: "50%",
           borderLeft: 5,
         }}
       >
@@ -30,11 +29,7 @@ export default function MediaControlCard() {
           <Typography component="div" variant="h5">
             25 Tasks
           </Typography>
-          <Typography
-            variant="subtitle1"
-            color="text.secondary"
-            component="div"
-          >
+          <Typography variant="subtitle1" color="#f50057" component="div">
             Completed
           </Typography>
         </CardContent>
