@@ -5,7 +5,7 @@ import { makeStyles } from "@mui/styles";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 import Navbar from "./CustomComponents/NavBar";
-import Table from "./CustomComponents/SortableTable";
+import ArchivedTask from "./Pages/ArchivedTasks";
 import SideDrawerTask from "./Components/SideDrawerTask";
 import DashboardCard from "./CustomComponents/DashboardCard";
 import BarChart from "./CustomComponents/BarChart";
@@ -43,11 +43,11 @@ function App() {
                 <Route path="/dashboard">
                   <Dashboard />
                 </Route>
-                <Route path="/newsub">
-                  <NewSubject />
+                <Route path="/archived">
+                  <ArchivedTask />
                 </Route>
                 <Route path="/newsub">
-                  <Table />
+                  <NewSubject />
                 </Route>
                 <Route path="/cardDets">
                   <SideDrawerTask />

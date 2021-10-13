@@ -48,6 +48,14 @@ const darkTheme = createTheme({
     action: {
       active: "#BB86FC",
     },
+    overrides: {
+      MUIDataTable: {
+        responsiveStacked: {
+          maxHeight: "none",
+          overflowX: "auto",
+        },
+      },
+    },
   },
 });
 
