@@ -5,30 +5,38 @@ import {
   randomTraderName,
   randomUpdatedDate,
 } from "@mui/x-data-grid-generator";
+import { TextField } from "@mui/material";
+import { Button } from "@mui/material";
 
 export default function BasicEditingGrid() {
   return (
-    <div style={{ height: 300, width: "100%" }}>
-      <DataGrid rows={rows} columns={columns} />
+    <div>
+      <TextField id="outlined-basic" label="Subject" variant="outlined" />
+      <Button variant="contained">Add Subject</Button>
+      <div style={{ height: 400, width: "100%" }}>
+        <DataGrid rows={rows} columns={columns} />
+      </div>
     </div>
   );
 }
 
 const columns = [
-  { field: "name", headerName: "Name", width: 180, editable: true },
-  { field: "age", headerName: "Age", type: "number", editable: true },
+  { field: "name", headerName: "Name", minWidth: 200, editable: true, flex: 1 },
+  { field: "age", headerName: "Age", type: "number", editable: true, flex: 1 },
   {
     field: "dateCreated",
     headerName: "Date Created",
     type: "date",
-    width: 180,
+    flex: 1,
+    minWidth: 200,
     editable: true,
   },
   {
     field: "lastLogin",
     headerName: "Last Login",
     type: "dateTime",
-    width: 220,
+    flex: 1,
+    minWidth: 200,
     editable: true,
   },
 ];
