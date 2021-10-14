@@ -51,6 +51,8 @@ function ResponsiveDrawer(props) {
 
       <List>
         {[
+          { compName: "All Tasks(Cards)", compPath: "/archived" },
+          { compName: "All Tasks(Table)", compPath: "/archived" },
           {
             compName: "Predefined Tasks",
             compPath: "/predefined",
