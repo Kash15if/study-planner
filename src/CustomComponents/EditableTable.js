@@ -5,17 +5,10 @@ import {
   randomTraderName,
   randomUpdatedDate,
 } from "@mui/x-data-grid-generator";
-import { TextField } from "@mui/material";
-import { Button } from "@mui/material";
-
 export default function BasicEditingGrid() {
   return (
-    <div>
-      <TextField id="outlined-basic" label="Subject" variant="outlined" />
-      <Button variant="contained">Add Subject</Button>
-      <div style={{ height: 400, width: "100%" }}>
-        <DataGrid rows={rows} columns={columns} />
-      </div>
+    <div style={{ height: 400, width: "100%" }}>
+      <DataGrid rows={rows} columns={columns} />
     </div>
   );
 }

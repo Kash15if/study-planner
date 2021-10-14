@@ -1,20 +1,13 @@
 import Chart from "react-google-charts";
 
-const PieChart = () => {
+const PieChart = (props) => {
   return (
     <Chart
       width={"100%"}
       height={"100%"}
       chartType="PieChart"
       loader={<div>Loading Chart</div>}
-      data={[
-        ["Task", "Hours per Day"],
-        ["Work", 11],
-        ["Eat", 2],
-        ["Commute", 2],
-        ["Watch TV", 2],
-        ["Sleep", 7],
-      ]}
+      data={props.data}
       options={{
         backgroundColor: "#192735",
         chartArea: {
@@ -23,7 +16,7 @@ const PieChart = () => {
           height: "90%",
           width: "90%",
         },
-        title: "My Daily Activities",
+        title: props.title,
         // Just add this option
         pieHole: 0.4,
         titleTextStyle: {

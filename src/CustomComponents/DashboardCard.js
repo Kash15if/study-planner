@@ -4,7 +4,7 @@ import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 
-export default function MediaControlCard() {
+export default function MediaControlCard(props) {
   return (
     <Card
       sx={{
@@ -13,7 +13,7 @@ export default function MediaControlCard() {
         py: "5px",
         borderRadius: 1,
         bgcolor: "background.paper",
-        color: "#fbc02d",
+        color: props.color,
       }}
     >
       <Box
@@ -27,10 +27,10 @@ export default function MediaControlCard() {
       >
         <CardContent sx={{ flex: "1 0 auto" }}>
           <Typography component="div" variant="h5">
-            25 Tasks
+            {props.data.num} Tasks
           </Typography>
-          <Typography variant="subtitle1" color="#f50057" component="div">
-            Completed
+          <Typography variant="subtitle1" color={props.color} component="div">
+            {props.data.label}
           </Typography>
         </CardContent>
         <Box sx={{ display: "flex", alignItems: "center", pl: 1, pb: 1 }}></Box>
