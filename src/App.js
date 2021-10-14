@@ -11,11 +11,12 @@ import CreateNewTask from "./Pages/CreateTask";
 import BarChart from "./CustomComponents/BarChart";
 import PieChart from "./CustomComponents/PieChart";
 import CalenderView from "./Components/CalenderView";
+import EditableTable from "./CustomComponents/EditableTable";
 import { Box } from "@mui/system";
 
 //All pages for routes
 import Dashboard from "./Pages/Dashboard";
-import NewSubject from "./Components/CreateNewSubject";
+//import NewSubject from "./Components/CreateNewSubject";
 import ErrorPage from "./Pages/404";
 
 const useStyles = makeStyles({
@@ -47,7 +48,7 @@ function App() {
                   <ArchivedTask />
                 </Route>
                 <Route path="/newsub">
-                  <NewSubject />
+                  <EditableTable />
                 </Route>
                 <Route path="/predefined">
                   <PredefinedTask />
