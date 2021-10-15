@@ -8,13 +8,13 @@ import Navbar from "./CustomComponents/NavBar";
 import ArchivedTask from "./Pages/ArchivedTasks";
 import PredefinedTask from "./Pages/PredefinedTasks";
 import CreateNewTask from "./Pages/CreateTask";
-import BarChart from "./CustomComponents/BarChart";
-import PieChart from "./CustomComponents/PieChart";
 import CalenderView from "./Components/CalenderView";
 //import EditableTable from "./CustomComponents/EditableTable";
 import { Box } from "@mui/system";
 
 //All pages for routes
+import ManageTask from "./Pages/ManageTask";
+import AllTask from "./Pages/AllTask";
 import Dashboard from "./Pages/Dashboard";
 import NewSubject from "./Pages/CreateSubject";
 import ErrorPage from "./Pages/404";
@@ -56,11 +56,11 @@ function App() {
                 <Route path="/createnewtask">
                   <CreateNewTask />
                 </Route>
-                <Route path="/BarChart">
-                  <BarChart />
+                <Route path="/managetask">
+                  <ManageTask />
                 </Route>
-                <Route path="/PieChart">
-                  <PieChart />
+                <Route path="/alltask">
+                  <AllTask />
                 </Route>
 
                 <Route path="/calender">
