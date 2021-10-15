@@ -22,7 +22,7 @@ const AllTasks = () => {
       />
       <Grid container spacing={2}>
         {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((num) => (
-          <Grid item md={4} sm={8} xs={10}>
+          <Grid item md={4} sm={8} xs={12}>
             <div onClick={openDrawer}>
               <Card />
             </div>
