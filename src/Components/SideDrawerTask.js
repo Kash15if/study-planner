@@ -1,38 +1,41 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import SlidingPane from "react-sliding-pane";
 import "react-sliding-pane/dist/react-sliding-pane.css";
 
-const DrawerTask = () => {
-  const [state, setState] = useState({
-    isPaneOpen: false,
-    isPaneOpenLeft: false,
-  });
+import CretateTask from "../Pages/CreateTask";
+
+const DrawerTask = (props) => {
+  const [state, setState] = useState(props.opener);
+
+  useEffect(() => {
+    setState(props.opener);
+  }, [props.opener]);
 
   return (
     <div>
-      <button onClick={() => setState({ isPaneOpen: true })}>
+      {/* <button onClick={() => setState({ isPaneOpen: true })}>
         Click me to open right pane!
       </button>
       <div style={{ marginTop: "32px" }}>
         <button onClick={() => setState({ isPaneOpenLeft: true })}>
           Click me to open left pane with 20% width!
         </button>
-      </div>
+      </div> */}
       <SlidingPane
         className="some-custom-class"
         overlayClassName="some-custom-overlay-class"
-        isOpen={state.isPaneOpen}
+        isOpen={state}
         title="Hey, it is optional pane title.  I can be React component too."
         subtitle="Optional subtitle."
         onRequestClose={() => {
           // triggered on "<" on left top click or on outside click
-          setState({ isPaneOpen: false });
+          setState(false);
         }}
+        backgroundColor="red"
       >
-        <div>And I am pane content. BTW, what rocks?</div>
-        <br />
+        <CretateTask />
       </SlidingPane>
-      <SlidingPane
+      {/* <SlidingPane
         closeIcon={<div>Some div containing custom close icon.</div>}
         isOpen={state.isPaneOpenLeft}
         title="Hey, it is optional pane title.  I can be React component too."
@@ -41,7 +44,7 @@ const DrawerTask = () => {
         onRequestClose={() => setState({ isPaneOpenLeft: false })}
       >
         <div>And I am pane content on left.</div>
-      </SlidingPane>
+      </SlidingPane> */}
     </div>
   );
 };
