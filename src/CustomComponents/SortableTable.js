@@ -12,6 +12,7 @@ export default function DataGridDemo(props) {
         pageSize={pageSize}
         onPageSizeChange={(newPageSize) => setPageSize(newPageSize)}
         rowsPerPageOptions={[5, 10, 20]}
+        getRowId={(row) => row[props.idName]}
         pagination
       />
     </div>
