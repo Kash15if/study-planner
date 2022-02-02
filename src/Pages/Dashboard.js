@@ -22,8 +22,13 @@ const Dashboard = () => {
         let due = 0;
         let notSt = 0;
         let inProg = 0;
+        let calData = [];
 
         dataX.forEach((element) => {
+          calData.push({
+            title: element.task,
+            date: element.deadline,
+          });
           if (element.completed) {
             comp++;
           } else {
@@ -37,6 +42,8 @@ const Dashboard = () => {
         });
 
         setPieData([comp, inProg, due, notSt]);
+        setCalenderData([...calData]);
+        console.log(calData);
       });
   }, []);
   return (
@@ -46,13 +53,13 @@ const Dashboard = () => {
           <Grid item sm={3} xs={12}>
             <Cards
               color="#00E676"
-              data={{ num: pieData[0], label: "Completed" }}
+              data={{ num: pieData[0] || 0, label: "Completed" }}
             ></Cards>
           </Grid>
           <Grid item sm={3} xs={12}>
             <Cards
               color="#29B6F6"
-              data={{ num: pieData[1], label: "In progress" }}
+              data={{ num: pieData[1] || 0, label: "In progress" }}
             ></Cards>
           </Grid>
           <Grid item sm={3} xs={12}>
@@ -85,13 +92,16 @@ const Dashboard = () => {
         </Grid>
         <Grid item sm={7} xs={12}>
           <CalenderView
-            data={[
-              { title: "event 1", date: "2021-10-01" },
-              { title: "event 2", date: "2021-10-10" },
-              { title: "event 3", date: "2021-10-16" },
-              { title: "event 4", date: "2021-10-17" },
-              { title: "event 5", date: "2021-10-25" },
-            ]}
+            data={
+              calenderData
+              //   [
+              //   { title: "event 1", date: "2021-10-01" },
+              //   { title: "event 2", date: "2021-10-10" },
+              //   { title: "event 3", date: "2021-10-16" },
+              //   { title: "event 4", date: "2021-10-17" },
+              //   { title: "event 5", date: "2021-10-25" },
+              // ]
+            }
           />
         </Grid>
       </Grid>

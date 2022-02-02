@@ -1,4 +1,4 @@
-import Table from "../CustomComponents/FoldableTable";
+import Table from "../CustomComponents/CRUD-pr-table";
 
 const PredefinedTask = () => {
   return (
