@@ -19,7 +19,7 @@ import { InputText } from "primereact/inputtext";
 
 const DataTableCrudDemo = () => {
   //creating subtask object for new subtask
-  let emptyProduct = {
+  let emptySubTask = {
     subtaskid: null,
     taskid: null,
     subtask: "",
@@ -33,7 +33,7 @@ const DataTableCrudDemo = () => {
   const [stDialog, setStDialog] = useState(false);
   const [deleteStDialog, setDeleteStDialog] = useState(false);
   const [deleteStsDialog, setDeleteStsDialog] = useState(false);
-  const [subTask, setSubTask] = useState(emptyProduct);
+  const [subTask, setSubTask] = useState(emptySubTask);
   const [selectedSubTasks, setSelectedSubTasks] = useState(null);
   const [submitted, setSubmitted] = useState(false);
   const [globalFilter, setGlobalFilter] = useState(null);
@@ -93,6 +93,82 @@ const DataTableCrudDemo = () => {
     </div>
   );
 
+  const hideDialog = () => {
+    setSubmitted(false);
+    setStDialog(false);
+  };
+
+  const saveSubTask = () => {
+    setSubmitted(true);
+
+    if (subTask.name.trim()) {
+      let _sts = [...subTasks];
+      let _subTask = { ...subTask };
+      if (subTask.subtaskid) {
+        const index = findIndexById(subTask.subtaskid);
+
+        _sts[index] = _subTask;
+        toast.current.show({
+          severity: "success",
+          summary: "Successful",
+          detail: "Product Updated",
+          life: 3000,
+        });
+      } else {
+        subTask.subtaskid = createId();
+        _sts.push(_subTask);
+        toast.current.show({
+          severity: "success",
+          summary: "Successful",
+          detail: "Product Created",
+          life: 3000,
+        });
+      }
+
+      setSubTasks(_sts);
+      setStDialog(false);
+      setSubTask(emptySubTask);
+    }
+  };
+
+  const hideDeleteStsDialog = () => {
+    setDeleteStDialog(false);
+  };
+
+  const deleteSelectedSts = () => {
+    let _sts = subTasks.filter((val) => !selectedSubTasks.includes(val));
+    setSubTasks(_sts);
+    setDeleteStsDialog(false);
+    setSelectedSubTasks(null);
+    toast.current.show({
+      severity: "success",
+      summary: "Successful",
+      detail: "Products Deleted",
+      life: 3000,
+    });
+  };
+
+  const findIndexById = (id) => {
+    let index = -1;
+    for (let i = 0; i < subTasks.length; i++) {
+      if (subTasks[i].subtaskid === id) {
+        index = i;
+        break;
+      }
+    }
+
+    return index;
+  };
+
+  const createId = () => {
+    let id = "";
+    let chars =
+      "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+    for (let i = 0; i < 5; i++) {
+      id += chars.charAt(Math.floor(Math.random() * chars.length));
+    }
+    return id;
+  };
   //action body teemplate for edit and delete in datatable
 
   const actionBodyTemplate = (rowData) => {
@@ -112,6 +188,40 @@ const DataTableCrudDemo = () => {
       </React.Fragment>
     );
   };
+
+  const stDialogFooter = (
+    <React.Fragment>
+      <Button
+        label="Cancel"
+        icon="pi pi-times"
+        className="p-button-text"
+        onClick={hideDialog}
+      />
+      <Button
+        label="Save"
+        icon="pi pi-check"
+        className="p-button-text"
+        onClick={saveSubTask}
+      />
+    </React.Fragment>
+  );
+
+  const deleteStsDialogFooter = (
+    <React.Fragment>
+      <Button
+        label="No"
+        icon="pi pi-times"
+        className="p-button-text"
+        onClick={hideDeleteStsDialog}
+      />
+      <Button
+        label="Yes"
+        icon="pi pi-check"
+        className="p-button-text"
+        onClick={deleteSelectedSts}
+      />
+    </React.Fragment>
+  );
 
   return (
     subTasks && (
@@ -163,6 +273,155 @@ const DataTableCrudDemo = () => {
             ></Column>
           </DataTable>
         </div>
+
+        <Dialog
+          visible={stDialog}
+          style={{ width: "450px" }}
+          header="Product Details"
+          modal
+          className="p-fluid"
+          footer={stDialogFooter}
+          onHide={hideDialog}
+        >
+          <div className="field">
+            <label htmlFor="name">Name</label>
+            {/* <InputText
+              id="name"
+              value={product.name}
+              onChange={(e) => onInputChange(e, "name")}
+              required
+              autoFocus
+              className={classNames({
+                "p-invalid": submitted && !product.name,
+              })}
+            />
+            {submitted && !product.name && (
+              <small className="p-error">Name is required.</small>
+            )}
+          </div>
+          <div className="field">
+            <label htmlFor="description">Description</label>
+            <InputTextarea
+              id="description"
+              value={product.description}
+              onChange={(e) => onInputChange(e, "description")}
+              required
+              rows={3}
+              cols={20}
+            />
+          </div>
+
+          <div className="field">
+            <label className="mb-3">Category</label>
+            <div className="formgrid grid">
+              <div className="field-radiobutton col-6">
+                <RadioButton
+                  inputId="category1"
+                  name="category"
+                  value="Accessories"
+                  onChange={onCategoryChange}
+                  checked={product.category === "Accessories"}
+                />
+                <label htmlFor="category1">Accessories</label>
+              </div>
+              <div className="field-radiobutton col-6">
+                <RadioButton
+                  inputId="category2"
+                  name="category"
+                  value="Clothing"
+                  onChange={onCategoryChange}
+                  checked={product.category === "Clothing"}
+                />
+                <label htmlFor="category2">Clothing</label>
+              </div>
+              <div className="field-radiobutton col-6">
+                <RadioButton
+                  inputId="category3"
+                  name="category"
+                  value="Electronics"
+                  onChange={onCategoryChange}
+                  checked={product.category === "Electronics"}
+                />
+                <label htmlFor="category3">Electronics</label>
+              </div>
+              <div className="field-radiobutton col-6">
+                <RadioButton
+                  inputId="category4"
+                  name="category"
+                  value="Fitness"
+                  onChange={onCategoryChange}
+                  checked={product.category === "Fitness"}
+                />
+                <label htmlFor="category4">Fitness</label>
+              </div>
+            </div>
+          </div>
+
+          <div className="formgrid grid">
+            <div className="field col">
+              <label htmlFor="price">Price</label>
+              <InputNumber
+                id="price"
+                value={product.price}
+                onValueChange={(e) => onInputNumberChange(e, "price")}
+                mode="currency"
+                currency="USD"
+                locale="en-US"
+              />
+            </div>
+            <div className="field col">
+              <label htmlFor="quantity">Quantity</label>
+              <InputNumber
+                id="quantity"
+                value={product.quantity}
+                onValueChange={(e) => onInputNumberChange(e, "quantity")}
+                integeronly
+              />
+            </div>
+          </div>
+        </Dialog>
+
+        <Dialog
+          visible={deleteProductDialog}
+          style={{ width: "450px" }}
+          header="Confirm"
+          modal
+          footer={deleteProductDialogFooter}
+          onHide={hideDeleteProductDialog}
+        >
+          <div className="confirmation-content">
+            <i
+              className="pi pi-exclamation-triangle mr-3"
+              style={{ fontSize: "2rem" }}
+            />
+            {product && (
+              <span>
+                Are you sure you want to delete <b>{product.name}</b>?
+              </span>
+            )} */}
+          </div>
+        </Dialog>
+
+        <Dialog
+          visible={deleteStDialog}
+          style={{ width: "450px" }}
+          header="Confirm"
+          modal
+          footer={deleteStsDialogFooter}
+          onHide={hideDeleteStsDialog}
+        >
+          <div className="confirmation-content">
+            <i
+              className="pi pi-exclamation-triangle mr-3"
+              style={{ fontSize: "2rem" }}
+            />
+            {subTask && (
+              <span>
+                Are you sure you want to delete the selected products?
+              </span>
+            )}
+          </div>
+        </Dialog>
       </div>
     )
   );
