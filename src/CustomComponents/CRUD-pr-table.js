@@ -133,13 +133,17 @@ const DataTableCrudDemo = () => {
 
   const hideDeleteStsDialog = () => {
     setDeleteStDialog(false);
+    setDeleteStsDialog(false);
   };
 
   const deleteSelectedSts = () => {
+    console.log(subTasks);
+    console.log(selectedSubTasks);
     let _sts = subTasks.filter((val) => !selectedSubTasks.includes(val));
     setSubTasks(_sts);
     setDeleteStsDialog(false);
     setSelectedSubTasks(null);
+
     toast.current.show({
       severity: "success",
       summary: "Successful",
@@ -168,6 +172,59 @@ const DataTableCrudDemo = () => {
       id += chars.charAt(Math.floor(Math.random() * chars.length));
     }
     return id;
+  };
+
+  const openNew = () => {
+    setSubTask(emptySubTask);
+    setSubmitted(false);
+    setStDialog(true);
+  };
+
+  const confirmDeleteSelected = () => {
+    console.log(subTasks);
+    console.log(selectedSubTasks);
+    setDeleteStsDialog(true);
+  };
+
+  const importCSV = (e) => {
+    const file = e.files[0];
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      const csv = e.target.result;
+      const data = csv.split("\n");
+
+      // Prepare DataTable
+      const cols = data[0].replace(/['"]+/g, "").split(",");
+      data.shift();
+
+      const importedData = data.map((d) => {
+        d = d.split(",");
+        const processedData = cols.reduce((obj, c, i) => {
+          c =
+            c === "Status"
+              ? "inventoryStatus"
+              : c === "Reviews"
+              ? "rating"
+              : c.toLowerCase();
+          obj[c] = d[i].replace(/['"]+/g, "");
+          (c === "price" || c === "rating") && (obj[c] = parseFloat(obj[c]));
+          return obj;
+        }, {});
+
+        processedData["id"] = createId();
+        return processedData;
+      });
+
+      const _subTasks = [...subTasks, ...importedData];
+
+      setSubTasks(_subTasks);
+    };
+
+    reader.readAsText(file, "UTF-8");
+  };
+
+  const exportCSV = () => {
+    dt.current.exportCSV();
   };
   //action body teemplate for edit and delete in datatable
 
@@ -213,20 +270,71 @@ const DataTableCrudDemo = () => {
         icon="pi pi-times"
         className="p-button-text"
         onClick={hideDeleteStsDialog}
+        style={{ marginRight: "1.2rem" }}
       />
       <Button
         label="Yes"
         icon="pi pi-check"
         className="p-button-text"
+        style={{ marginLeft: "1.2rem" }}
         onClick={deleteSelectedSts}
       />
     </React.Fragment>
   );
 
+  const leftToolbarTemplate = () => {
+    return (
+      <React.Fragment>
+        <Button
+          label="New"
+          icon="pi pi-plus"
+          className="p-button-success mr-2"
+          onClick={openNew}
+        />
+        <Button
+          label="Delete"
+          icon="pi pi-trash"
+          className="p-button-danger"
+          onClick={confirmDeleteSelected}
+          disabled={!selectedSubTasks || !selectedSubTasks.length}
+        />
+      </React.Fragment>
+    );
+  };
+
+  const rightToolbarTemplate = () => {
+    return (
+      <React.Fragment>
+        <FileUpload
+          mode="basic"
+          name="demo[]"
+          auto
+          url="https://primefaces.org/primereact/showcase/upload.php"
+          accept=".csv"
+          chooseLabel="Import"
+          className="mr-2 inline-block"
+          onUpload={importCSV}
+        />
+        <Button
+          label="Export"
+          icon="pi pi-upload"
+          className="p-button-help"
+          onClick={exportCSV}
+        />
+      </React.Fragment>
+    );
+  };
+
   return (
     subTasks && (
       <div className="datatable-crud-demo">
         <div className="card">
+          <Toolbar
+            className="mb-4"
+            left={leftToolbarTemplate}
+            right={rightToolbarTemplate}
+          ></Toolbar>
+
           <DataTable
             ref={dt}
             value={subTasks}
@@ -416,6 +524,27 @@ const DataTableCrudDemo = () => {
               style={{ fontSize: "2rem" }}
             />
             {subTask && (
+              <span>
+                Are you sure you want to delete the selected products?
+              </span>
+            )}
+          </div>
+        </Dialog>
+
+        <Dialog
+          visible={deleteStsDialog}
+          style={{ width: "450px" }}
+          header="Confirm"
+          modal
+          footer={deleteStsDialogFooter}
+          onHide={hideDeleteStsDialog}
+        >
+          <div className="confirmation-content">
+            <i
+              className="pi pi-exclamation-triangle mr-3"
+              style={{ fontSize: "2rem" }}
+            />
+            {selectedSubTasks && (
               <span>
                 Are you sure you want to delete the selected products?
               </span>
