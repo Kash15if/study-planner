@@ -195,7 +195,7 @@ const DataTableCrudDemo = () => {
   };
 
   const deleteSelectedProducts = () => {
-    let _products = products.filter((val) => !selectedProducts.includes(val));
+    let _products = products.filter((val) => !selectedSts.includes(val));
     setProducts(_products);
     setDeleteProductsDialog(false);
     setSelectedProducts(null);

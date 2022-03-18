@@ -13,9 +13,11 @@ import { RadioButton } from "primereact/radiobutton";
 import { InputNumber } from "primereact/inputnumber";
 import { Dialog } from "primereact/dialog";
 import { InputText } from "primereact/inputtext";
+import { Checkbox } from "primereact/checkbox";
 // import "./DataTableDemo.css";
 
-// import { useState, useEffect } from "react";
+//import uuid npm library
+import { v4 as uuidv4 } from "uuid";
 
 const DataTableCrudDemo = () => {
   //creating subtask object for new subtask
@@ -101,7 +103,7 @@ const DataTableCrudDemo = () => {
   const saveSubTask = () => {
     setSubmitted(true);
 
-    if (subTask.name.trim()) {
+    if (subTask.subtask.trim()) {
       let _sts = [...subTasks];
       let _subTask = { ...subTask };
       if (subTask.subtaskid) {
@@ -111,7 +113,7 @@ const DataTableCrudDemo = () => {
         toast.current.show({
           severity: "success",
           summary: "Successful",
-          detail: "Product Updated",
+          detail: "SubTask Updated",
           life: 3000,
         });
       } else {
@@ -120,7 +122,7 @@ const DataTableCrudDemo = () => {
         toast.current.show({
           severity: "success",
           summary: "Successful",
-          detail: "Product Created",
+          detail: "SubTask Created",
           life: 3000,
         });
       }
@@ -165,13 +167,8 @@ const DataTableCrudDemo = () => {
   };
 
   const createId = () => {
-    let id = "";
-    let chars =
-      "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-    for (let i = 0; i < 5; i++) {
-      id += chars.charAt(Math.floor(Math.random() * chars.length));
-    }
-    return id;
+    let myuuid = uuidv4();
+    return myuuid;
   };
 
   const openNew = () => {
@@ -184,6 +181,14 @@ const DataTableCrudDemo = () => {
     console.log(subTasks);
     console.log(selectedSubTasks);
     setDeleteStsDialog(true);
+  };
+
+  const onInputChange = (e, name) => {
+    const val = (e.target && e.target.value) || "";
+    let _subTask = { ...subTask };
+    _subTask[`${name}`] = val;
+
+    setSubTask(_subTask);
   };
 
   const importCSV = (e) => {
@@ -223,6 +228,23 @@ const DataTableCrudDemo = () => {
     reader.readAsText(file, "UTF-8");
   };
 
+  const hideDeleteStDialog = () => {
+    setDeleteStDialog(false);
+  };
+
+  const deleteSt = () => {
+    let _sts = subTasks.filter((val) => val.subtaskid !== subTask.subtaskid);
+    setSubTasks(_sts);
+    setDeleteStDialog(false);
+    setSubTask(emptySubTask);
+    toast.current.show({
+      severity: "success",
+      summary: "Successful",
+      detail: "SubTask Deleted",
+      life: 3000,
+    });
+  };
+
   const exportCSV = () => {
     dt.current.exportCSV();
   };
@@ -259,6 +281,23 @@ const DataTableCrudDemo = () => {
         icon="pi pi-check"
         className="p-button-text"
         onClick={saveSubTask}
+      />
+    </React.Fragment>
+  );
+
+  const deleteStDialogFooter = (
+    <React.Fragment>
+      <Button
+        label="No"
+        icon="pi pi-times"
+        className="p-button-text"
+        onClick={hideDeleteStDialog}
+      />
+      <Button
+        label="Yes"
+        icon="pi pi-check"
+        className="p-button-text"
+        onClick={deleteSt}
       />
     </React.Fragment>
   );
@@ -328,6 +367,7 @@ const DataTableCrudDemo = () => {
   return (
     subTasks && (
       <div className="datatable-crud-demo">
+        <Toast ref={toast} />
         <div className="card">
           <Toolbar
             className="mb-4"
@@ -385,133 +425,75 @@ const DataTableCrudDemo = () => {
         <Dialog
           visible={stDialog}
           style={{ width: "450px" }}
-          header="Product Details"
+          header="SubTask Details"
           modal
           className="p-fluid"
           footer={stDialogFooter}
           onHide={hideDialog}
         >
           <div className="field">
-            <label htmlFor="name">Name</label>
-            {/* <InputText
-              id="name"
-              value={product.name}
-              onChange={(e) => onInputChange(e, "name")}
+            <label htmlFor="SubTask">SubTask</label>
+            <InputText
+              id="subTask"
+              value={subTask.subtask}
+              onChange={(e) => onInputChange(e, "subtask")}
               required
               autoFocus
               className={classNames({
-                "p-invalid": submitted && !product.name,
+                "p-invalid": submitted && !subTask.subtask,
               })}
             />
-            {submitted && !product.name && (
-              <small className="p-error">Name is required.</small>
+            {submitted && !subTask.subtask && (
+              <small className="p-error">SubTask is required.</small>
             )}
           </div>
+
           <div className="field">
-            <label htmlFor="description">Description</label>
-            <InputTextarea
-              id="description"
-              value={product.description}
-              onChange={(e) => onInputChange(e, "description")}
-              required
-              rows={3}
-              cols={20}
+            <label htmlFor="Description">Description</label>
+            <InputText
+              id="
+              description"
+              value={subTask.desc}
+              onChange={(e) => onInputChange(e, "desc")}
+              autoFocus
             />
           </div>
 
           <div className="field">
-            <label className="mb-3">Category</label>
-            <div className="formgrid grid">
-              <div className="field-radiobutton col-6">
-                <RadioButton
-                  inputId="category1"
-                  name="category"
-                  value="Accessories"
-                  onChange={onCategoryChange}
-                  checked={product.category === "Accessories"}
-                />
-                <label htmlFor="category1">Accessories</label>
-              </div>
-              <div className="field-radiobutton col-6">
-                <RadioButton
-                  inputId="category2"
-                  name="category"
-                  value="Clothing"
-                  onChange={onCategoryChange}
-                  checked={product.category === "Clothing"}
-                />
-                <label htmlFor="category2">Clothing</label>
-              </div>
-              <div className="field-radiobutton col-6">
-                <RadioButton
-                  inputId="category3"
-                  name="category"
-                  value="Electronics"
-                  onChange={onCategoryChange}
-                  checked={product.category === "Electronics"}
-                />
-                <label htmlFor="category3">Electronics</label>
-              </div>
-              <div className="field-radiobutton col-6">
-                <RadioButton
-                  inputId="category4"
-                  name="category"
-                  value="Fitness"
-                  onChange={onCategoryChange}
-                  checked={product.category === "Fitness"}
-                />
-                <label htmlFor="category4">Fitness</label>
-              </div>
-            </div>
-          </div>
-
-          <div className="formgrid grid">
-            <div className="field col">
-              <label htmlFor="price">Price</label>
-              <InputNumber
-                id="price"
-                value={product.price}
-                onValueChange={(e) => onInputNumberChange(e, "price")}
-                mode="currency"
-                currency="USD"
-                locale="en-US"
-              />
-            </div>
-            <div className="field col">
-              <label htmlFor="quantity">Quantity</label>
-              <InputNumber
-                id="quantity"
-                value={product.quantity}
-                onValueChange={(e) => onInputNumberChange(e, "quantity")}
-                integeronly
-              />
-            </div>
+            <label htmlFor="Link">URL</label>
+            <InputText
+              id="
+              link"
+              value={subTask.link}
+              onChange={(e) => onInputChange(e, "link")}
+              autoFocus
+            />
           </div>
         </Dialog>
 
         <Dialog
-          visible={deleteProductDialog}
+          visible={deleteStDialog}
           style={{ width: "450px" }}
           header="Confirm"
           modal
-          footer={deleteProductDialogFooter}
-          onHide={hideDeleteProductDialog}
+          footer={deleteStDialogFooter}
+          onHide={hideDeleteStDialog}
         >
           <div className="confirmation-content">
             <i
               className="pi pi-exclamation-triangle mr-3"
               style={{ fontSize: "2rem" }}
             />
-            {product && (
+            {subTask && (
               <span>
-                Are you sure you want to delete <b>{product.name}</b>?
+                Are you sure you want to delete <b>{subTask.subtask}</b>?
               </span>
-            )} */}
+            )}
           </div>
         </Dialog>
 
         <Dialog
-          visible={deleteStDialog}
+          visible={deleteStsDialog}
           style={{ width: "450px" }}
           header="Confirm"
           modal
