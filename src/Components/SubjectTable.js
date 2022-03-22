@@ -21,16 +21,7 @@ import { visuallyHidden } from "@mui/utils";
 import { useState } from "react";
 
 export default function EnhancedTable(props) {
-  const data = [
-    {
-      subject: "abvf",
-      date: "fef",
-    },
-    {
-      subject: "pqr",
-      date: "dddddddddddddddd",
-    },
-  ];
+  const data = props.data;
 
   const handleClick = (event, rowData) => {
     let d = new Date();
