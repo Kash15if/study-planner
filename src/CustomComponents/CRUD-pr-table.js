@@ -14,7 +14,7 @@ import { InputNumber } from "primereact/inputnumber";
 import { Dialog } from "primereact/dialog";
 import { InputText } from "primereact/inputtext";
 import { Checkbox } from "primereact/checkbox";
-// import "./DataTableDemo.css";
+import "../CSS/DataTableDemo.css";
 
 //import uuid npm library
 import { v4 as uuidv4 } from "uuid";
@@ -255,13 +255,14 @@ const DataTableCrudDemo = () => {
       <React.Fragment>
         <Button
           icon="pi pi-pencil"
-          className="p-button-rounded p-button-success m-2"
-          style={{ marginRight: "1.2rem" }}
+          className="p-button-rounded p-button-success "
+          style={{ margin: "0.7rem" }}
           onClick={() => editSubTask(rowData)}
         />
         <Button
           icon="pi pi-trash"
-          className="p-button-rounded p-button-danger m-2"
+          className="p-button-rounded p-button-danger "
+          style={{ margin: "0.7rem" }}
           onClick={() => confirmDeleteSubTask(rowData)}
         />
       </React.Fragment>
@@ -327,13 +328,14 @@ const DataTableCrudDemo = () => {
         <Button
           label="New"
           icon="pi pi-plus"
-          className="p-button-success mr-2"
+          style={{ margin: "1.5rem" }}
+          className="p-button-success mr-2 openNewBtn"
           onClick={openNew}
         />
         <Button
           label="Delete"
           icon="pi pi-trash"
-          className="p-button-danger"
+          className="p-button-danger deleteSelectedBtn"
           onClick={confirmDeleteSelected}
           disabled={!selectedSubTasks || !selectedSubTasks.length}
         />
@@ -351,13 +353,14 @@ const DataTableCrudDemo = () => {
           url="https://primefaces.org/primereact/showcase/upload.php"
           accept=".csv"
           chooseLabel="Import"
-          className="mr-2 inline-block"
+          className="mr-2 inline-block importCsvBtn"
           onUpload={importCSV}
         />
         <Button
           label="Export"
           icon="pi pi-upload"
-          className="p-button-help"
+          className="p-button-help  exportCsvBtn"
+          style={{ margin: "1.5rem" }}
           onClick={exportCSV}
         />
       </React.Fragment>
@@ -370,7 +373,7 @@ const DataTableCrudDemo = () => {
         <Toast ref={toast} />
         <div className="card">
           <Toolbar
-            className="mb-4"
+            style={{ marginBottom: "1rem" }}
             left={leftToolbarTemplate}
             right={rightToolbarTemplate}
           ></Toolbar>
@@ -482,7 +485,7 @@ const DataTableCrudDemo = () => {
           <div className="confirmation-content">
             <i
               className="pi pi-exclamation-triangle mr-3"
-              style={{ fontSize: "2rem" }}
+              style={{ fontSize: "2rem", margin: "2rem" }}
             />
             {subTask && (
               <span>

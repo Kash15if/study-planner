@@ -1,12 +1,11 @@
 import CreateTask from "../Components/CreateTaskForm";
 import EditableTable from "../CustomComponents/EditableTable";
+import SubTaskTable from "../CustomComponents/CRUD-pr-table";
 import { Grid } from "@mui/material";
 
 const CreateNewTask = () => {
   return (
     <div>
-      <CreateTask />
-
       <Grid
         container
         spacing={2}
@@ -14,8 +13,12 @@ const CreateNewTask = () => {
         justifyContent="center"
         alignItems="center"
       >
-        <Grid item md={8} xs={12}>
-          <EditableTable />
+        <Grid item md={10} xs={12}>
+          <CreateTask />
+        </Grid>
+
+        <Grid item md={10} xs={12}>
+          <SubTaskTable />
         </Grid>
       </Grid>
     </div>

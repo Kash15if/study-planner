@@ -1,0 +1,39 @@
+.table-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+@media screen and (max-width: 960px) {
+  .table-header {
+    align-items: flex-start;
+  }
+}
+
+.confirmation-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@media screen and (max-width: 960px) {
+  .p-toolbar {
+    flex-wrap: wrap;
+  }
+  .p-button {
+    margin-bottom: 0.25rem;
+  }
+  .table-header {
+    flex-direction: column;
+  }
+  .p-input-icon-left,
+  .table-header input {
+    width: 100%;
+  }
+}
+
+.openNewBtn,
+.deleteSelectedBtn,
+.exportCsvBtn,
+.importCsvBtn {
+  margin: "2rem";
+}
