@@ -373,7 +373,7 @@ const DataTableCrudDemo = () => {
         <Toast ref={toast} />
         <div className="card">
           <Toolbar
-            style={{ marginBottom: "1rem" }}
+            style={{ marginBottom: "1rem", backgroundColor: "#273A50" }}
             left={leftToolbarTemplate}
             right={rightToolbarTemplate}
           ></Toolbar>
@@ -392,6 +392,7 @@ const DataTableCrudDemo = () => {
             globalFilter={globalFilter}
             header={header}
             responsiveLayout="scroll"
+            style={{ color: "#273A50" }}
           >
             <Column
               selectionMode="multiple"
