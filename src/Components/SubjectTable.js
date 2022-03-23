@@ -19,6 +19,7 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import FilterListIcon from "@mui/icons-material/FilterList";
 import { visuallyHidden } from "@mui/utils";
 import { useState } from "react";
+import { pink } from "@mui/material/colors";
 
 export default function EnhancedTable(props) {
   const data = props.data;
@@ -54,6 +55,10 @@ export default function EnhancedTable(props) {
                     Date Created
                   </Typography>
                 </TableCell>
+
+                <TableCell key="action" padding="2rem">
+                  Action
+                </TableCell>
               </TableRow>
             </TableHead>
 
@@ -82,6 +87,15 @@ export default function EnhancedTable(props) {
                       padding="2rem"
                     >
                       {row.date}
+                    </TableCell>
+
+                    <TableCell
+                      component="th"
+                      id="date"
+                      scope="row"
+                      padding="2rem"
+                    >
+                      <DeleteIcon sx={{ color: pink[500] }}></DeleteIcon>
                     </TableCell>
                   </TableRow>
                 );

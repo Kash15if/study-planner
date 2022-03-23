@@ -33,11 +33,11 @@ const CreateSubject = () => {
     if (formData.id) {
       let allData = tabData.map((row) => {
         if (row.id === formData.id) {
-          return {
-            formData,
-          };
+          return formData;
         } else return row;
       });
+
+      setTabData(allData);
     } else {
       let idIn = Math.floor(Math.random() * 100 + 1);
       setTabData([...tabData, { ...formData, id: idIn }]);
@@ -50,10 +50,19 @@ const CreateSubject = () => {
     let dateIn = d.toLocaleDateString();
 
     setFormData({
+      ...formData,
       subject: value,
       date: dateIn,
     });
     //console.log(values);
+  };
+
+  const handleClear = () => {
+    setFormData({
+      subject: "",
+      date: "",
+      id: "",
+    });
   };
 
   return (
@@ -66,7 +75,7 @@ const CreateSubject = () => {
         alignItems="center"
         style={{ marginBottom: "5rem" }}
       >
-        <Grid item md={3} sm={12}>
+        <Grid item md={12} sm={12}>
           <TextField
             id="subject"
             label="Subject"
@@ -77,8 +86,30 @@ const CreateSubject = () => {
         </Grid>
 
         <Grid item md={2} sm={12}>
-          <Button variant="contained" size="large" onClick={handleSubmimt}>
-            Add Subject
+          <Button variant="contained" onClick={handleSubmimt}>
+            {formData.id ? "Update" : "Add"}
+          </Button>
+        </Grid>
+
+        <Grid
+          item
+          md={2}
+          sm={12}
+          sx={{ display: formData.id ? "inline" : "none" }}
+        >
+          <Button variant="contained" onClick={handleSubmimt} disabled={false}>
+            Delete
+          </Button>
+        </Grid>
+
+        <Grid
+          item
+          md={2}
+          sm={12}
+          sx={{ display: formData.id ? "inline" : "none" }}
+        >
+          <Button variant="contained" onClick={handleClear} disabled={false}>
+            Clear
           </Button>
         </Grid>
       </Grid>
