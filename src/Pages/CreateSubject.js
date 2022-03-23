@@ -42,6 +42,8 @@ const CreateSubject = () => {
       let idIn = Math.floor(Math.random() * 100 + 1);
       setTabData([...tabData, { ...formData, id: idIn }]);
     }
+
+    handleClear();
   };
 
   const handleTextChange = (event) => {
@@ -54,7 +56,6 @@ const CreateSubject = () => {
       subject: value,
       date: dateIn,
     });
-    //console.log(values);
   };
 
   const handleClear = () => {
@@ -63,6 +64,10 @@ const CreateSubject = () => {
       date: "",
       id: "",
     });
+  };
+
+  const handleDelete = () => {
+    handleClear();
   };
 
   return (

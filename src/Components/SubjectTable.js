@@ -55,10 +55,6 @@ export default function EnhancedTable(props) {
                     Date Created
                   </Typography>
                 </TableCell>
-
-                <TableCell key="action" padding="2rem">
-                  Action
-                </TableCell>
               </TableRow>
             </TableHead>
 
@@ -87,15 +83,6 @@ export default function EnhancedTable(props) {
                       padding="2rem"
                     >
                       {row.date}
-                    </TableCell>
-
-                    <TableCell
-                      component="th"
-                      id="date"
-                      scope="row"
-                      padding="2rem"
-                    >
-                      <DeleteIcon sx={{ color: pink[500] }}></DeleteIcon>
                     </TableCell>
                   </TableRow>
                 );
