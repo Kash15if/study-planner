@@ -22,7 +22,7 @@ const DrawerTask = (props) => {
   };
 
   const columns = [
-    { field: "id", headerName: "ID", width: 90 },
+    { field: "id", hide: true },
     {
       field: "firstName",
       headerName: "First name",
@@ -96,7 +96,7 @@ const DrawerTask = (props) => {
           </Grid>
         </Grid>
 
-        <SortableTable rows={rows} columns={columns} />
+        <SortableTable rows={rows} columns={columns} idName="id" />
       </Box>
     </div>
   );
