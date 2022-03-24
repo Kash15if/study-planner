@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Box } from "@mui/material";
+import { Box, Button } from "@mui/material";
 import { Grid } from "@mui/material";
 
 import SortableTable from "../CustomComponents/SortableTable";
@@ -67,8 +67,19 @@ const DrawerTask = (props) => {
 
   return (
     <div>
-      {" "}
-      <Box sx={{ height: "auto" }}>
+      <Box sx={{ height: "auto", padding: "5rem" }}>
+        <Button
+          sx={{
+            position: "absolute",
+            top: 0,
+            right: "25px",
+            fontSize: "36px",
+            backgroundColor: "yellow",
+          }}
+        >
+          close
+        </Button>
+
         <Grid
           container
           spacing={2}

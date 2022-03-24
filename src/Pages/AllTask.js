@@ -14,7 +14,20 @@ const AllTasks = () => {
 
   return (
     <div>
-      <Box>
+      <Box
+        sx={{
+          width: opener ? "90%" : 0,
+          position: "fixed",
+          zIndex: 10001,
+          top: 0,
+          right: 0,
+          backgroundColor: "black",
+          opacity: 0.9,
+          overflowX: "auto",
+          transition: "0.5s",
+          paddingTop: "60px",
+        }}
+      >
         <CardPanTask />
       </Box>
       <Grid container spacing={2}>
