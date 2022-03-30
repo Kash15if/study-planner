@@ -4,6 +4,8 @@ import { Grid } from "@mui/material";
 
 import SortableTable from "../CustomComponents/SortableTable";
 
+import "../CSS/taskDets.css";
+
 // import CretateTask from "../Pages/CreateTask";
 
 const DrawerTask = (props) => {
@@ -67,7 +69,7 @@ const DrawerTask = (props) => {
 
   return (
     <div>
-      <Box sx={{ height: "auto", padding: "5rem" }}>
+      <Box sx={{ height: "auto", padding: "1rem" }}>
         <Button
           sx={{
             position: "absolute",
@@ -79,35 +81,32 @@ const DrawerTask = (props) => {
         >
           close
         </Button>
+        <table>
+          <tr>
+            <th>Subject:</th>
+            <td>Bill Gates</td>
+          </tr>
+          <tr>
+            <th>Task:</th>
+            <td>555 77 854</td>
+          </tr>
+          <tr>
+            <th>Description:</th>
+            <td>555 77 855</td>
+          </tr>
+          <tr>
+            <th>Start Date:</th>
+            <td>555 77 855</td>
+          </tr>
 
-        <Grid
-          container
-          spacing={2}
-          textAlign="left"
-          justifyContent="space-around"
-        >
-          <Grid item md={4} sm={8} xs={10}>
-            Subject:- {task.subject}
-          </Grid>
-
-          <Grid item md={4} sm={8} xs={10}>
-            Task:- {task.task}
-          </Grid>
-
-          <Grid item md={10} sm={10} xs={10}>
-            Description:- {task.desc}
-          </Grid>
-
-          <Grid item xs={4}>
-            Start Date:- {task.fromdate}
-          </Grid>
-
-          <Grid item xs={4}>
-            End Date:- {task.todate}
-          </Grid>
-        </Grid>
-
-        <SortableTable rows={rows} columns={columns} idName="id" />
+          <tr>
+            <th>End Date:</th>
+            <td>555 77 855</td>
+          </tr>
+        </table>
+        <div style={{ marginTop: "5rem" }}>
+          <SortableTable rows={rows} columns={columns} idName="id" />
+        </div>
       </Box>
     </div>
   );
