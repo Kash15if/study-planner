@@ -88,7 +88,7 @@ const DrawerTask = (props) => {
 
     {
       id: 5,
-      subtask: "Snow",
+      subtask: "",
       desc: "scse vrf xz vfap lad l ",
       link: 35,
       comp: true,
@@ -96,7 +96,7 @@ const DrawerTask = (props) => {
 
     {
       id: 56,
-      subtask: "Snow",
+      subtask: "",
       desc: "scse vrf xz vfap lad l ",
       link: 35,
       comp: true,
@@ -104,7 +104,7 @@ const DrawerTask = (props) => {
 
     {
       id: 7,
-      subtask: "Snow",
+      subtask: "",
       desc: "scse vrf xz vfap lad l ",
       link: 35,
       comp: true,
@@ -112,7 +112,7 @@ const DrawerTask = (props) => {
 
     {
       id: 8,
-      subtask: "Snow",
+      subtask: "",
       desc: "scse vrf xz vfap lad l ",
       link: 35,
       comp: true,
@@ -120,7 +120,7 @@ const DrawerTask = (props) => {
 
     {
       id: 9,
-      subtask: "Snow",
+      subtask: "",
       desc: "scse vrf xz vfap lad l ",
       link: 35,
       comp: true,
@@ -128,7 +128,7 @@ const DrawerTask = (props) => {
 
     {
       id: 10,
-      subtask: "Snow",
+      subtask: "",
       desc: "scse vrf xz vfap lad l ",
       link: 35,
       comp: true,
@@ -137,13 +137,13 @@ const DrawerTask = (props) => {
 
   return (
     <div>
-      <Box sx={{ padding: "1rem" }}>
+      <Box sx={{ padding: "1rem", height: "90vh" }}>
         <Button
           sx={{
             position: "absolute",
             top: 0,
             right: "25px",
-            fontSize: "36px",
+            fontSize: "30px",
             backgroundColor: "yellow",
           }}
           onClick={closePanel}
@@ -173,7 +173,7 @@ const DrawerTask = (props) => {
             <td>555 77 855</td>
           </tr>
         </table>
-        <div style={{ marginTop: "5rem" }}>
+        <div style={{ marginTop: "3rem" }}>
           <SortableTable rows={rows} columns={columns} idName="id" />
         </div>
       </Box>

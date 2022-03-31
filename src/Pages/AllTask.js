@@ -23,7 +23,7 @@ const AllTasks = () => {
         sx={{
           width: opener ? "90%" : 0,
           position: "fixed",
-          zIndex: 10001,
+          zIndex: 10005,
           top: 0,
           right: 0,
           backgroundColor: "black",
