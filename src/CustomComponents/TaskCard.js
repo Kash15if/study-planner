@@ -6,7 +6,12 @@ import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import EditIcon from "@mui/icons-material/Edit";
 
+import { Knob } from "primereact/knob";
+import { useState } from "react";
+
 export default function RecipeReviewCard() {
+  const [value2, setValue2] = useState(50);
+
   return (
     <Card fullwidth>
       <CardHeader
@@ -15,11 +20,6 @@ export default function RecipeReviewCard() {
             R
           </Avatar>
         }
-        action={
-          <IconButton color="secondary" aria-label="settings">
-            <EditIcon />
-          </IconButton>
-        }
         title={<Typography color="secondary">Front ENd</Typography>}
         subheader={
           <Typography color="secondary">September 14, 2016</Typography>
@@ -27,6 +27,9 @@ export default function RecipeReviewCard() {
       />
 
       <CardContent>
+        <div>
+          <Knob value={value2} readOnly valueColor={"rgb(3, 218, 200)"} />
+        </div>
         <Typography color="secondary" variant="h6">
           Node JS
         </Typography>

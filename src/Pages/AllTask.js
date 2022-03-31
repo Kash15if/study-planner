@@ -12,6 +12,11 @@ const AllTasks = () => {
     console.log(opener);
   };
 
+  const closeDrawer = () => {
+    setOpener(false);
+    console.log(opener);
+  };
+
   return (
     <div>
       <Box
@@ -28,7 +33,7 @@ const AllTasks = () => {
           paddingTop: "60px",
         }}
       >
-        <CardPanTask />
+        <CardPanTask closePanel={closeDrawer} />
       </Box>
       <Grid container spacing={2}>
         {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((num) => (

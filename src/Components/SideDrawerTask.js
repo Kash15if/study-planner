@@ -12,6 +12,8 @@ import "../CSS/taskDets.css";
 const DrawerTask = (props) => {
   const [state, setState] = useState(props.data);
 
+  const closeSidePanel = props.closePanel;
+
   useEffect(() => {
     setState(props.opener);
   }, [props.opener]);
@@ -22,6 +24,12 @@ const DrawerTask = (props) => {
     fromdate: "sdeee",
     todate: "sdefe",
     desc: "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+  };
+
+  const closePanel = () => {
+    closeSidePanel();
+
+    console.log("opener");
   };
 
   const columns = [
@@ -77,11 +85,59 @@ const DrawerTask = (props) => {
       link: 35,
       comp: true,
     },
+
+    {
+      id: 5,
+      subtask: "Snow",
+      desc: "scse vrf xz vfap lad l ",
+      link: 35,
+      comp: true,
+    },
+
+    {
+      id: 56,
+      subtask: "Snow",
+      desc: "scse vrf xz vfap lad l ",
+      link: 35,
+      comp: true,
+    },
+
+    {
+      id: 7,
+      subtask: "Snow",
+      desc: "scse vrf xz vfap lad l ",
+      link: 35,
+      comp: true,
+    },
+
+    {
+      id: 8,
+      subtask: "Snow",
+      desc: "scse vrf xz vfap lad l ",
+      link: 35,
+      comp: true,
+    },
+
+    {
+      id: 9,
+      subtask: "Snow",
+      desc: "scse vrf xz vfap lad l ",
+      link: 35,
+      comp: true,
+    },
+
+    {
+      id: 10,
+      subtask: "Snow",
+      desc: "scse vrf xz vfap lad l ",
+      link: 35,
+      comp: true,
+    },
   ];
 
   return (
     <div>
-      <Box sx={{ height: "auto", padding: "1rem" }}>
+      <Box sx={{ padding: "1rem" }}>
         <Button
           sx={{
             position: "absolute",
@@ -90,6 +146,7 @@ const DrawerTask = (props) => {
             fontSize: "36px",
             backgroundColor: "yellow",
           }}
+          onClick={closePanel}
         >
           <CancelPresentationIcon fontSize="large" />
         </Button>
