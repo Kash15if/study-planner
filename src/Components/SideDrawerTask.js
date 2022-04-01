@@ -10,21 +10,17 @@ import "../CSS/taskDets.css";
 // import CretateTask from "../Pages/CreateTask";
 
 const DrawerTask = (props) => {
-  const [state, setState] = useState(props.data);
+  const [state, setState] = useState(props.taskData);
 
   const closeSidePanel = props.closePanel;
+
+  console.log(props.taskData);
 
   useEffect(() => {
     setState(props.opener);
   }, [props.opener]);
 
-  let task = {
-    task: "dddfddf",
-    subject: "aaaaaaaaa",
-    fromdate: "sdeee",
-    todate: "sdefe",
-    desc: "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
-  };
+  let task = props.taskData;
 
   const closePanel = () => {
     closeSidePanel();
@@ -153,24 +149,24 @@ const DrawerTask = (props) => {
         <table>
           <tr>
             <th>Subject:</th>
-            <td>Bill Gates</td>
+            <td>{task.subject}</td>
           </tr>
           <tr>
             <th>Task:</th>
-            <td>555 77 854</td>
+            <td>{task.task}</td>
           </tr>
           <tr>
             <th>Description:</th>
-            <td>555 77 855</td>
+            <td>{task.desc}</td>
           </tr>
           <tr>
             <th>Start Date:</th>
-            <td>555 77 855</td>
+            <td>{task.fromdate}</td>
           </tr>
 
           <tr>
             <th>End Date:</th>
-            <td>555 77 855</td>
+            <td>{task.todate}</td>
           </tr>
         </table>
         <div style={{ marginTop: "3rem" }}>

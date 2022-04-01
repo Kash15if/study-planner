@@ -6,9 +6,12 @@ import { useState } from "react";
 import { Box } from "@mui/material";
 const AllTasks = () => {
   const [opener, setOpener] = useState(false);
+  const [selectedTask, setSelectedTask] = useState(null);
 
-  const openDrawer = () => {
+  const openDrawer = (data) => {
     setOpener(true);
+    // console.log(data);
+    setSelectedTask(data);
     console.log(opener);
   };
 
@@ -26,19 +29,28 @@ const AllTasks = () => {
           zIndex: 10005,
           top: 0,
           right: 0,
-          backgroundColor: "black",
-          opacity: 0.9,
+          backgroundColor: "RGB(13, 30, 45)",
+          color: "BB86FC",
+          opacity: 0.99,
           overflowX: "auto",
           transition: "0.5s",
           paddingTop: "60px",
         }}
       >
-        <CardPanTask closePanel={closeDrawer} />
+        <CardPanTask closePanel={closeDrawer} taskData={selectedTask} />
       </Box>
       <Grid container spacing={2}>
-        {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((num) => (
+        {[
+          {
+            task: "dddfddf",
+            subject: "aaaaaaaaa",
+            fromdate: "sdeee",
+            todate: "sdefe",
+            desc: "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          },
+        ].map((selectedRow) => (
           <Grid item md={4} sm={8} xs={12}>
-            <div onClick={openDrawer}>
+            <div onClick={() => openDrawer(selectedRow)}>
               <Card />
             </div>
           </Grid>
