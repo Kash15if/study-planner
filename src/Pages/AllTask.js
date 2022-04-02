@@ -62,6 +62,13 @@ const AllTasks = () => {
             todate: "2022-03-19",
             desc: "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.",
           },
+          {
+            task: "some task",
+            subject: "1st Subject",
+            fromdate: "2022-03-10",
+            todate: "2022-03-19",
+            desc: "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.",
+          },
         ].map((selectedRow) => (
           <Grid item md={4} sm={8} xs={12}>
             <div onClick={() => openDrawer(selectedRow)}>
