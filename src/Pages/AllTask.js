@@ -42,16 +42,30 @@ const AllTasks = () => {
       <Grid container spacing={2}>
         {[
           {
-            task: "dddfddf",
-            subject: "aaaaaaaaa",
-            fromdate: "sdeee",
-            todate: "sdefe",
-            desc: "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+            task: "1st Task",
+            subject: "1st Subject",
+            fromdate: "2022-02-10",
+            todate: "2022-04-22",
+            desc: "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+          },
+          {
+            task: "2nd task",
+            subject: "2nd subject",
+            fromdate: "2022-03-01",
+            todate: "2022-03-01",
+            desc: "Lorem Ipsum has been the industry's standard dummy text ever since the 1500s",
+          },
+          {
+            task: "some task",
+            subject: "1st Subject",
+            fromdate: "2022-03-10",
+            todate: "2022-03-19",
+            desc: "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.",
           },
         ].map((selectedRow) => (
           <Grid item md={4} sm={8} xs={12}>
             <div onClick={() => openDrawer(selectedRow)}>
-              <Card />
+              <Card taskData={selectedRow} />
             </div>
           </Grid>
         ))}

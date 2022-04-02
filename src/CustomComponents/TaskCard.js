@@ -7,38 +7,42 @@ import Typography from "@mui/material/Typography";
 import EditIcon from "@mui/icons-material/Edit";
 
 import { Knob } from "primereact/knob";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
-export default function RecipeReviewCard() {
+export default function RecipeReviewCard(props) {
   const [value2, setValue2] = useState(50);
+  const [task, setTask] = useState(null);
+
+  useEffect(() => {
+    setTask(props.taskData);
+    console.log(props.taskData);
+  }, [props.taskData]);
 
   return (
-    <Card fullwidth>
-      <CardHeader
-        avatar={
-          <Avatar sx={{ bgcolor: "#03DAC6" }} aria-label="recipe">
-            R
-          </Avatar>
-        }
-        title={<Typography color="secondary">Front ENd</Typography>}
-        subheader={
-          <Typography color="secondary">September 14, 2016</Typography>
-        }
-      />
+    task && (
+      <Card fullwidth>
+        <CardHeader
+          // avatar={
+          //   <Avatar sx={{ bgcolor: "#03DAC6" }} aria-label="recipe">
+          //     R
+          //   </Avatar>
+          // }
+          title={<Typography color="secondary">{task.subject}</Typography>}
+          subheader={<Typography color="secondary">{task.todate}</Typography>}
+        />
 
-      <CardContent>
-        <div>
-          <Knob value={value2} readOnly valueColor={"rgb(3, 218, 200)"} />
-        </div>
-        <Typography color="secondary" variant="h6">
-          Node JS
-        </Typography>
-        <Typography variant="body2" color="secondary">
-          This impressive paella is a perfect party dish and a fun meal to cook
-          together with your guests. Add 1 cup of frozen peas along with the
-          mussels, if you like.
-        </Typography>
-      </CardContent>
-    </Card>
+        <CardContent>
+          <div>
+            <Knob value={value2} readOnly valueColor={"rgb(3, 218, 200)"} />
+          </div>
+          <Typography color="secondary" variant="h6">
+            {task.task}
+          </Typography>
+          <Typography variant="body2" color="secondary">
+            {task.desc}
+          </Typography>
+        </CardContent>
+      </Card>
+    )
   );
 }

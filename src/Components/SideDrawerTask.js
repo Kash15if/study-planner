@@ -10,7 +10,8 @@ import "../CSS/taskDets.css";
 // import CretateTask from "../Pages/CreateTask";
 
 const DrawerTask = (props) => {
-  const [state, setState] = useState(props.taskData);
+  const [task, setTask] = useState(null);
+  const [state, setState] = useState(null);
 
   const closeSidePanel = props.closePanel;
 
@@ -20,7 +21,9 @@ const DrawerTask = (props) => {
     setState(props.opener);
   }, [props.opener]);
 
-  let task = props.taskData;
+  useEffect(() => {
+    setTask(props.taskData);
+  }, [props.taskData]);
 
   const closePanel = () => {
     closeSidePanel();
@@ -146,29 +149,31 @@ const DrawerTask = (props) => {
         >
           <CancelPresentationIcon fontSize="large" />
         </Button>
-        <table>
-          <tr>
-            <th>Subject:</th>
-            <td>{task.subject}</td>
-          </tr>
-          <tr>
-            <th>Task:</th>
-            <td>{task.task}</td>
-          </tr>
-          <tr>
-            <th>Description:</th>
-            <td>{task.desc}</td>
-          </tr>
-          <tr>
-            <th>Start Date:</th>
-            <td>{task.fromdate}</td>
-          </tr>
+        {task && (
+          <table>
+            <tr>
+              <th>Subject:</th>
+              <td>{task.subject}</td>
+            </tr>
+            <tr>
+              <th>Task:</th>
+              <td>{task.task}</td>
+            </tr>
+            <tr>
+              <th>Description:</th>
+              <td>{task.desc}</td>
+            </tr>
+            <tr>
+              <th>Start Date:</th>
+              <td>{task.fromdate}</td>
+            </tr>
 
-          <tr>
-            <th>End Date:</th>
-            <td>{task.todate}</td>
-          </tr>
-        </table>
+            <tr>
+              <th>End Date:</th>
+              <td>{task.todate}</td>
+            </tr>
+          </table>
+        )}
         <div style={{ marginTop: "3rem" }}>
           <SortableTable rows={rows} columns={columns} idName="id" />
         </div>
