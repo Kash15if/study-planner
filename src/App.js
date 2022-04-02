@@ -18,6 +18,7 @@ import AllTask from "./Pages/AllTask";
 import Dashboard from "./Pages/Dashboard";
 import NewSubject from "./Pages/CreateSubject";
 import ErrorPage from "./Pages/404";
+import ManageSubTask from "./Pages/ManageSubTask";
 
 const useStyles = makeStyles({
   root: {
@@ -66,6 +67,12 @@ function App() {
                 <Route path="/calender">
                   <div style={{ width: "80%" }}>
                     <CalenderView />
+                  </div>
+                </Route>
+
+                <Route path="/managesubtask">
+                  <div style={{ width: "80%" }}>
+                    <ManageSubTask />
                   </div>
                 </Route>
 

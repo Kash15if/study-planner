@@ -423,7 +423,8 @@ const DataTableCrudDemo = () => {
 
         <Dialog
           visible={stDialog}
-          style={{ width: "450px" }}
+          zIndex={500000}
+          style={{ width: "450px", zIndex: 5000 }}
           header="SubTask Details"
           modal
           className="p-fluid"
@@ -472,7 +473,8 @@ const DataTableCrudDemo = () => {
 
         <Dialog
           visible={deleteStDialog}
-          style={{ width: "450px" }}
+          zIndex={5000}
+          style={{ width: "450px", zIndex: 5000 }}
           header="Confirm"
           modal
           footer={deleteStDialogFooter}
@@ -493,7 +495,7 @@ const DataTableCrudDemo = () => {
 
         <Dialog
           visible={deleteStsDialog}
-          style={{ width: "450px" }}
+          style={{ width: "450px", zIndex: 50000 }}
           header="Confirm"
           modal
           footer={deleteStsDialogFooter}
@@ -514,7 +516,7 @@ const DataTableCrudDemo = () => {
 
         <Dialog
           visible={deleteStsDialog}
-          style={{ width: "450px" }}
+          style={{ width: "450px", zIndex: 50000 }}
           header="Confirm"
           modal
           footer={deleteStsDialogFooter}

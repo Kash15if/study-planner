@@ -7,6 +7,8 @@ import { useState, useEffect, useRef } from "react";
 import TextField from "@mui/material/TextField";
 import Grid from "@mui/material/Grid";
 
+import Autocomplete from "@mui/material/Autocomplete";
+
 //import for dialog
 import Button from "@mui/material/Button";
 import Dialog from "@mui/material/Dialog";
@@ -17,6 +19,7 @@ import DialogTitle from "@mui/material/DialogTitle";
 
 import Table from "../CustomComponents/EditableTable";
 import ManageTaskCard from "../Components/ManageTaskCard";
+import DataTableCrudDemo from "../CustomComponents/CRUD-pr-table";
 import CreateNewTask from "./CreateTask";
 import ManageTaskForm from "../Components/CreateTaskForm";
 
@@ -50,56 +53,31 @@ const ManageTask = () => {
     }
   }, [open]);
 
+  const top100Films = [
+    { label: "The Shawshank Redemption", year: 1994 },
+    { label: "The Godfather", year: 1972 },
+    { label: "The Godfather: Part II", year: 1974 },
+    { label: "The Dark Knight", year: 2008 },
+    { label: "12 Angry Men", year: 1957 },
+    { label: "Schindler's List", year: 1993 },
+    { label: "Pulp Fiction", year: 1994 },
+    {
+      label: "The Lord of the Rings: The Return of the King",
+      year: 2003,
+    },
+  ];
   return (
     <div>
-      {/* Dialog popup for Managing Task */}
-      <Dialog
-        maxWidth={"md"}
-        open={open}
-        onClose={handleClose}
-        scroll={"body"}
-        zIndex={100}
-        aria-labelledby="scroll-dialog-title"
-        aria-describedby="scroll-dialog-description"
-      >
-        <DialogTitle id="scroll-dialog-title">
-          {selectedTask ? selectedTask.task : "No Name Assigned"}
-        </DialogTitle>
-        <DialogContent>
-          <DialogContentText
-            id="scroll-dialog-description"
-            ref={descriptionElementRef}
-            tabIndex={-1}
-          >
-            {selectedTask ? <ManageTaskForm /> : "Task Loading"}
-          </DialogContentText>
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={handleClose}>Cancel</Button>
-        </DialogActions>
-      </Dialog>
-      {/* Dialog Popup ENds */}
-
       <Grid container spacing={2} justifyContent="center" mb={8}>
         <Grid item xs={10} md={3} sm={5}>
-          <FormControl fullWidth>
-            <InputLabel id="demo-simple-select-label">Subject</InputLabel>
-            <Select
-              labelId="demo-simple-select-label"
-              id="demo-simple-select"
-              value={age}
-              label="Subject"
-              onChange={handleChange}
-            >
-              <MenuItem value={"s1"}>S1</MenuItem>
-              <MenuItem value={"s2"}>S2</MenuItem>
-              <MenuItem value={"s3"}>S3</MenuItem>
-            </Select>
-          </FormControl>
-        </Grid>
-
-        <Grid item xs={12} md={3} sm={5}>
-          <TextField id="outlined-basic" label="Outlined" variant="outlined" />
+          {" "}
+          <Autocomplete
+            disablePortal
+            id="combo-box-demo"
+            options={top100Films}
+            sx={{ width: 300 }}
+            renderInput={(params) => <TextField {...params} label="Movie" />}
+          />
         </Grid>
       </Grid>
 
@@ -143,6 +121,8 @@ const ManageTask = () => {
           </Grid>
         ))}
       </Grid>
+
+      {selectedTask && <DataTableCrudDemo />}
     </div>
   );
 };

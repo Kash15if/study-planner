@@ -53,6 +53,8 @@ function ResponsiveDrawer(props) {
         {[
           { compName: "All Tasks", compPath: "/alltask" },
           { compName: "Manage Tasks", compPath: "/managetask" },
+
+          { compName: "Manage SubTasks", compPath: "/managesubtask" },
           {
             compName: "Predefined Tasks",
             compPath: "/predefined",
