@@ -17,7 +17,7 @@ const CreateNewTask = () => {
           <CreateTask />
         </Grid>
 
-        <Grid item md={10} xs={12}>
+        <Grid item md={10} xs={12} sx={{ width: "90vw" }}>
           <SubTaskTable />
         </Grid>
       </Grid>

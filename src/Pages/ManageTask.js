@@ -25,6 +25,16 @@ const ManageTask = () => {
   const [open, setOpen] = useState(false);
   const [selectedTask, setSelectedTask] = useState(null);
 
+  const [allData, setAllData] = useState("");
+
+  useEffect(() => {
+    fetch("http://localhost:3000/get/alltask")
+      .then((res) => res.json())
+      .then((dataX) => {
+        setAllData(dataX);
+      });
+  }, []);
+
   const handleChange = (event) => {
     setAge(event.target.value);
   };
@@ -106,42 +116,14 @@ const ManageTask = () => {
       {/* search box code ends and Task component started */}
 
       <Grid container spacing={1} justifyContent="space-around" mt={2}>
-        {[
-          {
-            task: "1st Task",
-            subject: "1st Subject",
-            fromdate: "2022-02-10",
-            todate: "2022-04-22",
-            desc: "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
-          },
-          {
-            task: "2nd task",
-            subject: "2nd subject",
-            fromdate: "2022-03-01",
-            todate: "2022-03-01",
-            desc: "Lorem Ipsum has been the industry's standard dummy text ever since the 1500s",
-          },
-          {
-            task: "some task",
-            subject: "1st Subject",
-            fromdate: "2022-03-10",
-            todate: "2022-03-19",
-            desc: "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.",
-          },
-          {
-            task: "some task",
-            subject: "1st Subject",
-            fromdate: "2022-03-10",
-            todate: "2022-03-19",
-            desc: "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.",
-          },
-        ].map((selectedRow) => (
-          <Grid item xs={12} md={4} sm={6}>
-            <div onClick={() => handleClickOpen(selectedRow)}>
-              <ManageTaskCard taskData={selectedRow} />
-            </div>
-          </Grid>
-        ))}
+        {allData &&
+          allData.map((selectedRow) => (
+            <Grid item xs={12} md={4} sm={6}>
+              <div onClick={() => handleClickOpen(selectedRow)}>
+                <ManageTaskCard taskData={selectedRow} />
+              </div>
+            </Grid>
+          ))}
       </Grid>
     </div>
   );

@@ -1,12 +1,21 @@
 import Card from "../CustomComponents/TaskCard";
 import { Grid } from "@mui/material";
 import CardPanTask from "../Components/SideDrawerTask";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 import { Box } from "@mui/material";
 const AllTasks = () => {
   const [opener, setOpener] = useState(false);
   const [selectedTask, setSelectedTask] = useState(null);
+  const [allData, setAllData] = useState("");
+
+  useEffect(() => {
+    fetch("http://localhost:3000/get/alltask")
+      .then((res) => res.json())
+      .then((dataX) => {
+        setAllData(dataX);
+      });
+  }, []);
 
   const openDrawer = (data) => {
     setOpener(true);
@@ -40,7 +49,8 @@ const AllTasks = () => {
         <CardPanTask closePanel={closeDrawer} taskData={selectedTask} />
       </Box>
       <Grid container spacing={2}>
-        {[
+        {
+          /* {[
           {
             task: "1st Task",
             subject: "1st Subject",
@@ -69,13 +79,16 @@ const AllTasks = () => {
             todate: "2022-03-19",
             desc: "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.",
           },
-        ].map((selectedRow) => (
-          <Grid item md={4} sm={8} xs={12}>
-            <div onClick={() => openDrawer(selectedRow)}>
-              <Card taskData={selectedRow} />
-            </div>
-          </Grid>
-        ))}
+        ]*/
+          allData &&
+            allData.map((selectedRow) => (
+              <Grid item md={4} sm={8} xs={12}>
+                <div onClick={() => openDrawer(selectedRow)}>
+                  <Card taskData={selectedRow} />
+                </div>
+              </Grid>
+            ))
+        }
       </Grid>
     </div>
   );

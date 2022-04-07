@@ -28,6 +28,16 @@ const ManageTask = () => {
   const [open, setOpen] = useState(false);
   const [selectedTask, setSelectedTask] = useState(null);
 
+  const [allData, setAllData] = useState("");
+
+  useEffect(() => {
+    fetch("http://localhost:3000/get/alltask")
+      .then((res) => res.json())
+      .then((dataX) => {
+        setAllData(dataX);
+      });
+  }, []);
+
   const handleChange = (event) => {
     setAge(event.target.value);
   };
@@ -74,9 +84,9 @@ const ManageTask = () => {
           <Autocomplete
             disablePortal
             id="combo-box-demo"
-            options={top100Films}
+            options={allData}
             sx={{ width: 300 }}
-            renderInput={(params) => <TextField {...params} label="Movie" />}
+            renderInput={(params) => <TextField {...params} label="Task" />}
           />
         </Grid>
       </Grid>

@@ -2,7 +2,7 @@ import { TextField } from "@mui/material";
 import { Button } from "@mui/material";
 import SubjectTable from "../Components/SubjectTable";
 import { Grid } from "@mui/material";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 const CreateSubject = () => {
   const [formData, setFormData] = useState({
@@ -11,25 +11,30 @@ const CreateSubject = () => {
     id: "",
   });
 
-  const [tabData, setTabData] = useState([
-    {
-      subject: "abvf",
-      date: "fef",
-      id: 1,
-    },
-    {
-      subject: "pqr",
-      date: "dddddddddddddddd",
-      id: 2,
-    },
-  ]);
+  const [tabData, setTabData] = useState(null);
+
+  const handleClear = () => {
+    setFormData({
+      subject: "",
+      date: "",
+      id: "",
+    });
+  };
+
+  useEffect(() => {
+    fetch(process.env.REACT_APP_BASE_URL_GET + "/allsubject")
+      .then((res) => res.json())
+      .then((dataX) => {
+        setTabData(dataX);
+      });
+  }, []);
 
   const handleFormEdit = (val) => {
     console.log(val);
     setFormData(val);
   };
 
-  const handleSubmimt = () => {
+  const handleSubmimt = async () => {
     if (formData.id) {
       let allData = tabData.map((row) => {
         if (row.id === formData.id) {
@@ -38,9 +43,33 @@ const CreateSubject = () => {
       });
 
       setTabData(allData);
+
+      const response = await fetch(
+        process.env.REACT_APP_BASE_URL_POST + "/updatesubject",
+        {
+          method: "POST", // *GET, POST, PUT, DELETE, etc.
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(formData),
+        }
+      );
+      return response.json();
     } else {
       let idIn = Math.floor(Math.random() * 100 + 1);
       setTabData([...tabData, { ...formData, id: idIn }]);
+
+      const response = await fetch(
+        process.env.REACT_APP_BASE_URL_POST + "/newsubject",
+        {
+          method: "POST", // *GET, POST, PUT, DELETE, etc.
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(formData),
+        }
+      );
+      return response.json();
     }
 
     handleClear();
@@ -58,16 +87,21 @@ const CreateSubject = () => {
     });
   };
 
-  const handleClear = () => {
-    setFormData({
-      subject: "",
-      date: "",
-      id: "",
-    });
-  };
+  const handleDelete = async () => {
+    const response = await fetch(
+      process.env.REACT_APP_BASE_URL_POST + "/delsubject",
+      {
+        method: "POST", // *GET, POST, PUT, DELETE, etc.
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      }
+    );
 
-  const handleDelete = () => {
     handleClear();
+
+    return response.json();
   };
 
   return (
@@ -102,7 +136,7 @@ const CreateSubject = () => {
           sm={12}
           sx={{ display: formData.id ? "inline" : "none" }}
         >
-          <Button variant="contained" onClick={handleSubmimt} disabled={false}>
+          <Button variant="contained" onClick={handleDelete} disabled={false}>
             Delete
           </Button>
         </Grid>
@@ -127,9 +161,11 @@ const CreateSubject = () => {
         alignItems="center"
         style={{ marginBottom: "5rem" }}
       >
-        <Grid item md={8} xs={12}>
-          <SubjectTable handleEdit={handleFormEdit} data={tabData} />
-        </Grid>
+        {tabData && (
+          <Grid item md={10} xs={12}>
+            <SubjectTable handleEdit={handleFormEdit} data={tabData} />
+          </Grid>
+        )}
       </Grid>
     </div>
   );

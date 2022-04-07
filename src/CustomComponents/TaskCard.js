@@ -28,12 +28,16 @@ export default function RecipeReviewCard(props) {
           //   </Avatar>
           // }
           title={<Typography color="secondary">{task.subject}</Typography>}
-          subheader={<Typography color="secondary">{task.todate}</Typography>}
+          subheader={<Typography color="secondary">{task.deadline}</Typography>}
         />
 
         <CardContent>
           <div>
-            <Knob value={value2} readOnly valueColor={"rgb(3, 218, 200)"} />
+            <Knob
+              value={task.precentComp}
+              readOnly
+              valueColor={"rgb(3, 218, 200)"}
+            />
           </div>
           <Typography color="secondary" variant="h6">
             {task.task}

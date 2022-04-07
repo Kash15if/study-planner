@@ -26,8 +26,8 @@ const ManageTaskCard = (props) => {
           },
         }}
       >
-        <Typography variant="h5">Subject:- {task.subject}</Typography>
-        <Typography variant="h6">Task :- {task.task}</Typography>
+        <Typography variant="h5">Task :- {task.task}</Typography>
+        <Typography variant="h6">Subject:- {task.subject}</Typography>
       </Box>
     )
   );
