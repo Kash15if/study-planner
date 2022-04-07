@@ -19,6 +19,8 @@ const CreateSubject = () => {
       date: "",
       id: "",
     });
+
+    // console.log(formData);
   };
 
   useEffect(() => {
@@ -54,6 +56,8 @@ const CreateSubject = () => {
           body: JSON.stringify(formData),
         }
       );
+
+      await handleClear();
       return response.json();
     } else {
       let idIn = Math.floor(Math.random() * 100 + 1);
@@ -66,9 +70,10 @@ const CreateSubject = () => {
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify(formData),
+          body: JSON.stringify(formData.id),
         }
       );
+      await handleClear();
       return response.json();
     }
 
@@ -99,7 +104,10 @@ const CreateSubject = () => {
       }
     );
 
-    handleClear();
+    console.log(response);
+
+    const alltasks = tabData.filter((row) => row.id !== formData.id);
+    await handleClear();
 
     return response.json();
   };
