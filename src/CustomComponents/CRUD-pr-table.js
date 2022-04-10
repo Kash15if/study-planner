@@ -14,7 +14,7 @@ import "../CSS/DataTableDemo.css";
 //import uuid npm library
 import { v4 as uuidv4 } from "uuid";
 
-const DataTableCrudDemo = () => {
+const DataTableCrudDemo = ({ subTasks, setSubTasks }) => {
   //creating subtask object for new subtask
   let emptySubTask = {
     subtaskid: null,
@@ -26,7 +26,6 @@ const DataTableCrudDemo = () => {
   };
 
   //All states and refs
-  const [subTasks, setSubTasks] = useState("");
   const [stDialog, setStDialog] = useState(false);
   const [deleteStDialog, setDeleteStDialog] = useState(false);
   const [deleteStsDialog, setDeleteStsDialog] = useState(false);
@@ -36,14 +35,6 @@ const DataTableCrudDemo = () => {
   const [globalFilter, setGlobalFilter] = useState(null);
   const toast = useRef(null);
   const dt = useRef(null);
-
-  useEffect(() => {
-    fetch("http://localhost:3000/get/subtask")
-      .then((res) => res.json())
-      .then((dataX) => {
-        setSubTasks(dataX);
-      });
-  }, []);
 
   //function for edit popup to open
 

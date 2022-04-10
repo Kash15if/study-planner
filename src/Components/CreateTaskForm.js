@@ -1,85 +1,3 @@
-// import Box from "@mui/material/Box";
-// import TextField from "@mui/material/TextField";
-// import Grid from "@mui/material/Grid";
-// import Button from "@mui/material/Button";
-// import InputLabel from "@mui/material/InputLabel";
-// import MenuItem from "@mui/material/MenuItem";
-// import FormControl from "@mui/material/FormControl";
-// import Select from "@mui/material/Select";
-// import { useState } from "react";
-// import { Checkbox } from "@mui/material";
-// import { FormGroup } from "@mui/material";
-// import { FormControlLabel } from "@mui/material";
-
-// import { Typography } from "@mui/material";
-
-// const AdminPage = () => {
-//   const [age, setAge] = useState("");
-
-//   const handleChange = (event) => {
-//     setAge(event.target.value);
-//     console.log(age);
-//   };
-
-//   return (
-//     <div>
-//       <Grid
-//         container
-//         spacing={2}
-//         direction="row"
-//         justifyContent="space-around"
-//         alignItems="center"
-//         mt={3}
-//       >
-//         <Grid item sm={6} xs={10}>
-//           <Grid container spacing={2}>
-//             <FormControl fullWidth>
-//               <InputLabel id="demo-simple-select-helper-label">
-//                 Paid by
-//               </InputLabel>
-//               <Select
-//                 labelId="demo-simple-select-helper-label"
-//                 id="demo-simple-select-helper"
-//                 value=""
-//                 label="Paid By"
-//                 onChange={handleChange}
-//               >
-//                 <MenuItem value="">
-//                   <em>None</em>
-//                 </MenuItem>
-//                 <MenuItem value="azarul">Azrul</MenuItem>
-//                 <MenuItem value="kashif">Kashif</MenuItem>
-//               </Select>
-//             </FormControl>
-//           </Grid>
-
-//           <Grid item sm={6} xs={12}>
-//             <FormGroup>
-//               <FormControlLabel
-//                 control={<Checkbox defaultChecked color="success" />}
-//                 label="Paid For Both"
-//               />
-//             </FormGroup>
-//           </Grid>
-
-//           <Grid item sm={12} xs={12}>
-//             <Button
-//               variant="contained"
-//               color="success"
-//               component="span"
-//               size="large"
-//             >
-//               Add
-//             </Button>
-//           </Grid>
-//         </Grid>
-//       </Grid>
-//     </div>
-//   );
-// };
-
-// export default AdminPage;
-
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import Grid from "@mui/material/Grid";
@@ -88,22 +6,21 @@ import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import AdapterDateFns from "@mui/lab/AdapterDateFns";
 import LocalizationProvider from "@mui/lab/LocalizationProvider";
 import MobileDatePicker from "@mui/lab/MobileDatePicker";
+import DesktopDatePicker from "@mui/lab/DesktopDatePicker";
 
 import SubTaskAcc from "../CustomComponents/SubTasksAccordian";
+import { constrainPoint } from "@fullcalendar/react";
 
-export default function HelperTextMisaligned(props) {
-  const [task, setTask] = useState({
-    subject: "",
-    task: "",
-    description: "",
-    fromdate: "",
-    todate: "",
-  });
-
+export default function HelperTextMisaligned({
+  subjectsList,
+  task,
+  setTask,
+  addTaskToDb,
+}) {
   const onInputChange = (e) => {
     var { id, value } = e.target;
 
@@ -112,19 +29,31 @@ export default function HelperTextMisaligned(props) {
       [id]: value,
     };
 
-    console.log(_task);
     setTask(_task);
   };
 
+  // const onSelectChange = (e) => {
+  //   const { name, value } = e.target;
+
+  //   let _task = {
+  //     ...task,
+  //     [name]: value,
+  //   };
+
+  //   setTask(_task);
+  // };
+
   const onSelectChange = (e) => {
-    const { name, value } = e.target;
+    const dataSelected = e.target.value;
+
+    const { id, subject } = dataSelected;
 
     let _task = {
       ...task,
-      [name]: value,
+      subid: id,
+      subject: subject,
     };
 
-    console.log(_task);
     setTask(_task);
   };
 
@@ -137,8 +66,6 @@ export default function HelperTextMisaligned(props) {
       fromdate: date,
     };
 
-    console.log(_task);
-
     setTask(_task);
   };
   const onToDateChange = (e) => {
@@ -150,13 +77,11 @@ export default function HelperTextMisaligned(props) {
       todate: date,
     };
 
-    console.log(_task);
-
     setTask(_task);
   };
 
   const AddTaskBtn = () => {
-    console.log(task);
+    addTaskToDb();
   };
 
   return (
@@ -179,9 +104,12 @@ export default function HelperTextMisaligned(props) {
               <MenuItem value="">
                 <em>None</em>
               </MenuItem>
-              <MenuItem value={"0"}>Ten</MenuItem>
-              <MenuItem value={"20"}>Twenty</MenuItem>
-              <MenuItem value={"30"}>Thirty</MenuItem>
+              {subjectsList &&
+                subjectsList.map((item) => {
+                  return (
+                    <MenuItem value={item.subject}>{item.subject}</MenuItem>
+                  );
+                })}
             </Select>
           </FormControl>
         </Grid>
@@ -207,9 +135,11 @@ export default function HelperTextMisaligned(props) {
 
         <Grid item sm={4} xs={12}>
           <LocalizationProvider dateAdapter={AdapterDateFns}>
-            <MobileDatePicker
+            <DesktopDatePicker
               label="From Date"
               inputFormat="yyyy/MM/dd"
+              minDate={new Date("2017-01-01")}
+              value={task.fromdate || new Date()}
               onChange={onFromDateChange}
               renderInput={(params) => <TextField {...params} />}
             />
@@ -218,10 +148,11 @@ export default function HelperTextMisaligned(props) {
 
         <Grid item sm={4} xs={12}>
           <LocalizationProvider dateAdapter={AdapterDateFns}>
-            <MobileDatePicker
-              label="Date mobile"
+            <DesktopDatePicker
+              label="To Date"
               inputFormat="yyyy/MM/dd"
-              value={"2021-01-01"}
+              minDate={new Date("2017-01-01")}
+              value={task.todate || new Date()}
               onChange={onToDateChange}
               renderInput={(params) => <TextField {...params} />}
             />
