@@ -28,12 +28,21 @@ const ManageTask = () => {
   const [open, setOpen] = useState(false);
   const [selectedTask, setSelectedTask] = useState(null);
 
-  const [allData, setAllData] = useState("");
+  const [allData, setAllData] = useState(null);
+  const [dataForFilter, setDataForFilter] = useState(null);
 
   useEffect(() => {
     fetch("http://localhost:3000/get/alltask")
       .then((res) => res.json())
       .then((dataX) => {
+        const dataForFilter = dataX.map((items) => {
+          return {
+            label: items.task,
+            id: items.taskid,
+          };
+        });
+
+        setDataForFilter(dataForFilter);
         setAllData(dataX);
       });
   }, []);
@@ -49,6 +58,10 @@ const ManageTask = () => {
     console.log(data);
   };
 
+  const setTaskSelect = (event, value) => {
+    const _task = allData.filter((x) => {});
+    console.log(value);
+  };
   const handleClose = () => {
     setOpen(false);
   };
@@ -63,19 +76,6 @@ const ManageTask = () => {
     }
   }, [open]);
 
-  const top100Films = [
-    { label: "The Shawshank Redemption", year: 1994 },
-    { label: "The Godfather", year: 1972 },
-    { label: "The Godfather: Part II", year: 1974 },
-    { label: "The Dark Knight", year: 2008 },
-    { label: "12 Angry Men", year: 1957 },
-    { label: "Schindler's List", year: 1993 },
-    { label: "Pulp Fiction", year: 1994 },
-    {
-      label: "The Lord of the Rings: The Return of the King",
-      year: 2003,
-    },
-  ];
   return (
     <div>
       <Grid container spacing={2} justifyContent="center" mb={8}>
@@ -84,8 +84,10 @@ const ManageTask = () => {
           <Autocomplete
             disablePortal
             id="combo-box-demo"
-            options={allData}
+            options={dataForFilter}
             sx={{ width: 300 }}
+            value={selectedTask}
+            onChange={(event, value) => setTaskSelect(event, value)}
             renderInput={(params) => <TextField {...params} label="Task" />}
           />
         </Grid>
@@ -93,44 +95,7 @@ const ManageTask = () => {
 
       {/* search box code ends and Task component started */}
 
-      <Grid container spacing={1} justifyContent="space-around" mt={2}>
-        {[
-          {
-            task: "1st Task",
-            subject: "1st Subject",
-            fromdate: "2022-02-10",
-            todate: "2022-04-22",
-            desc: "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
-          },
-          {
-            task: "2nd task",
-            subject: "2nd subject",
-            fromdate: "2022-03-01",
-            todate: "2022-03-01",
-            desc: "Lorem Ipsum has been the industry's standard dummy text ever since the 1500s",
-          },
-          {
-            task: "some task",
-            subject: "1st Subject",
-            fromdate: "2022-03-10",
-            todate: "2022-03-19",
-            desc: "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.",
-          },
-          {
-            task: "some task",
-            subject: "1st Subject",
-            fromdate: "2022-03-10",
-            todate: "2022-03-19",
-            desc: "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.",
-          },
-        ].map((selectedRow) => (
-          <Grid item xs={12} md={4} sm={6}>
-            <div onClick={() => handleClickOpen(selectedRow)}>
-              <ManageTaskCard taskData={selectedRow} />
-            </div>
-          </Grid>
-        ))}
-      </Grid>
+      <Grid container spacing={1} justifyContent="space-around" mt={2}></Grid>
 
       {selectedTask && <DataTableCrudDemo />}
     </div>

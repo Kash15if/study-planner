@@ -46,6 +46,11 @@ const CreateNewTask = ({ tasksFromDb, subTasksListsFromDb }) => {
 
   useEffect(() => {
     if (tasksFromDb) {
+      setTask(tasksFromDb);
+    }
+
+    if (subTasksListsFromDb) {
+      setSubjectsList(subTasksListsFromDb);
     }
   }, []);
 
