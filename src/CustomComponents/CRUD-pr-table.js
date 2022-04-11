@@ -354,179 +354,173 @@ const DataTableCrudDemo = ({ subTasks, setSubTasks }) => {
   };
 
   return (
-    subTasks && (
-      <div className="datatable-crud-demo">
-        <Toast ref={toast} />
-        <div className="card">
-          <Toolbar
-            style={{ marginBottom: "1rem", backgroundColor: "#273A50" }}
-            left={leftToolbarTemplate}
-            right={rightToolbarTemplate}
-          ></Toolbar>
+    <div className="datatable-crud-demo">
+      <Toast ref={toast} />
+      <div className="card">
+        <Toolbar
+          style={{ marginBottom: "1rem", backgroundColor: "#273A50" }}
+          left={leftToolbarTemplate}
+          right={rightToolbarTemplate}
+        ></Toolbar>
 
-          <DataTable
-            ref={dt}
-            value={subTasks}
-            selection={selectedSubTasks}
-            onSelectionChange={(e) => setSelectedSubTasks(e.value)}
-            dataKey="subtask"
-            paginator
-            rows={10}
-            rowsPerPageOptions={[5, 10, 25]}
-            paginatorTemplate="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink CurrentPageReport RowsPerPageDropdown"
-            currentPageReportTemplate="Showing {first} to {last} of {totalRecords} products"
-            globalFilter={globalFilter}
-            header={header}
-            responsiveLayout="scroll"
-            style={{ color: "#273A50" }}
-          >
-            <Column
-              selectionMode="multiple"
-              headerStyle={{ width: "3rem" }}
-              exportable={false}
-            ></Column>
-            <Column
-              field="subtask"
-              header="SubTask"
-              style={{ minWidth: "12rem" }}
-            ></Column>
-            <Column
-              field="desc"
-              header="Description"
-              sortable
-              style={{ minWidth: "16rem" }}
-            ></Column>
-            <Column field="link" header="Link"></Column>
-            <Column
-              field="completed"
-              header="Completed"
-              body={statusBodyTemplate}
-              sortable
-              style={{ minWidth: "8rem" }}
-            ></Column>
-            <Column
-              body={actionBodyTemplate}
-              exportable={false}
-              style={{ minWidth: "8rem" }}
-            ></Column>
-          </DataTable>
+        <DataTable
+          ref={dt}
+          value={subTasks || null}
+          selection={selectedSubTasks}
+          onSelectionChange={(e) => setSelectedSubTasks(e.value)}
+          dataKey="subtask"
+          paginator
+          rows={10}
+          rowsPerPageOptions={[5, 10, 25]}
+          paginatorTemplate="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink CurrentPageReport RowsPerPageDropdown"
+          currentPageReportTemplate="Showing {first} to {last} of {totalRecords} products"
+          globalFilter={globalFilter}
+          header={header}
+          responsiveLayout="scroll"
+          style={{ color: "#273A50" }}
+        >
+          <Column
+            selectionMode="multiple"
+            headerStyle={{ width: "3rem" }}
+            exportable={false}
+          ></Column>
+          <Column
+            field="subtask"
+            header="SubTask"
+            style={{ minWidth: "12rem" }}
+          ></Column>
+          <Column
+            field="desc"
+            header="Description"
+            sortable
+            style={{ minWidth: "16rem" }}
+          ></Column>
+          <Column field="link" header="Link"></Column>
+          <Column
+            field="completed"
+            header="Completed"
+            body={statusBodyTemplate}
+            sortable
+            style={{ minWidth: "8rem" }}
+          ></Column>
+          <Column
+            body={actionBodyTemplate}
+            exportable={false}
+            style={{ minWidth: "8rem" }}
+          ></Column>
+        </DataTable>
+      </div>
+
+      <Dialog
+        visible={stDialog}
+        zIndex={500000}
+        style={{ width: "450px", zIndex: 5000 }}
+        header="SubTask Details"
+        modal
+        className="p-fluid"
+        footer={stDialogFooter}
+        onHide={hideDialog}
+      >
+        <div className="field">
+          <label htmlFor="SubTask">SubTask</label>
+          <InputText
+            id="subTask"
+            value={subTask.subtask}
+            onChange={(e) => onInputChange(e, "subtask")}
+            required
+            autoFocus
+            className={classNames({
+              "p-invalid": submitted && !subTask.subtask,
+            })}
+          />
+          {submitted && !subTask.subtask && (
+            <small className="p-error">SubTask is required.</small>
+          )}
         </div>
 
-        <Dialog
-          visible={stDialog}
-          zIndex={500000}
-          style={{ width: "450px", zIndex: 5000 }}
-          header="SubTask Details"
-          modal
-          className="p-fluid"
-          footer={stDialogFooter}
-          onHide={hideDialog}
-        >
-          <div className="field">
-            <label htmlFor="SubTask">SubTask</label>
-            <InputText
-              id="subTask"
-              value={subTask.subtask}
-              onChange={(e) => onInputChange(e, "subtask")}
-              required
-              autoFocus
-              className={classNames({
-                "p-invalid": submitted && !subTask.subtask,
-              })}
-            />
-            {submitted && !subTask.subtask && (
-              <small className="p-error">SubTask is required.</small>
-            )}
-          </div>
-
-          <div className="field">
-            <label htmlFor="Description">Description</label>
-            <InputText
-              id="
+        <div className="field">
+          <label htmlFor="Description">Description</label>
+          <InputText
+            id="
               description"
-              value={subTask.desc}
-              onChange={(e) => onInputChange(e, "desc")}
-              autoFocus
-            />
-          </div>
+            value={subTask.desc}
+            onChange={(e) => onInputChange(e, "desc")}
+            autoFocus
+          />
+        </div>
 
-          <div className="field">
-            <label htmlFor="Link">URL</label>
-            <InputText
-              id="
+        <div className="field">
+          <label htmlFor="Link">URL</label>
+          <InputText
+            id="
               link"
-              value={subTask.link}
-              onChange={(e) => onInputChange(e, "link")}
-              autoFocus
-            />
-          </div>
-        </Dialog>
+            value={subTask.link}
+            onChange={(e) => onInputChange(e, "link")}
+            autoFocus
+          />
+        </div>
+      </Dialog>
 
-        <Dialog
-          visible={deleteStDialog}
-          zIndex={5000}
-          style={{ width: "450px", zIndex: 5000 }}
-          header="Confirm"
-          modal
-          footer={deleteStDialogFooter}
-          onHide={hideDeleteStDialog}
-        >
-          <div className="confirmation-content">
-            <i
-              className="pi pi-exclamation-triangle mr-3"
-              style={{ fontSize: "2rem", margin: "2rem" }}
-            />
-            {subTask && (
-              <span>
-                Are you sure you want to delete <b>{subTask.subtask}</b>?
-              </span>
-            )}
-          </div>
-        </Dialog>
+      <Dialog
+        visible={deleteStDialog}
+        zIndex={5000}
+        style={{ width: "450px", zIndex: 5000 }}
+        header="Confirm"
+        modal
+        footer={deleteStDialogFooter}
+        onHide={hideDeleteStDialog}
+      >
+        <div className="confirmation-content">
+          <i
+            className="pi pi-exclamation-triangle mr-3"
+            style={{ fontSize: "2rem", margin: "2rem" }}
+          />
+          {subTask && (
+            <span>
+              Are you sure you want to delete <b>{subTask.subtask}</b>?
+            </span>
+          )}
+        </div>
+      </Dialog>
 
-        <Dialog
-          visible={deleteStsDialog}
-          style={{ width: "450px", zIndex: 50000 }}
-          header="Confirm"
-          modal
-          footer={deleteStsDialogFooter}
-          onHide={hideDeleteStsDialog}
-        >
-          <div className="confirmation-content">
-            <i
-              className="pi pi-exclamation-triangle mr-3"
-              style={{ fontSize: "2rem" }}
-            />
-            {subTask && (
-              <span>
-                Are you sure you want to delete the selected products?
-              </span>
-            )}
-          </div>
-        </Dialog>
+      <Dialog
+        visible={deleteStsDialog}
+        style={{ width: "450px", zIndex: 50000 }}
+        header="Confirm"
+        modal
+        footer={deleteStsDialogFooter}
+        onHide={hideDeleteStsDialog}
+      >
+        <div className="confirmation-content">
+          <i
+            className="pi pi-exclamation-triangle mr-3"
+            style={{ fontSize: "2rem" }}
+          />
+          {subTask && (
+            <span>Are you sure you want to delete the selected products?</span>
+          )}
+        </div>
+      </Dialog>
 
-        <Dialog
-          visible={deleteStsDialog}
-          style={{ width: "450px", zIndex: 50000 }}
-          header="Confirm"
-          modal
-          footer={deleteStsDialogFooter}
-          onHide={hideDeleteStsDialog}
-        >
-          <div className="confirmation-content">
-            <i
-              className="pi pi-exclamation-triangle mr-3"
-              style={{ fontSize: "2rem" }}
-            />
-            {selectedSubTasks && (
-              <span>
-                Are you sure you want to delete the selected products?
-              </span>
-            )}
-          </div>
-        </Dialog>
-      </div>
-    )
+      <Dialog
+        visible={deleteStsDialog}
+        style={{ width: "450px", zIndex: 50000 }}
+        header="Confirm"
+        modal
+        footer={deleteStsDialogFooter}
+        onHide={hideDeleteStsDialog}
+      >
+        <div className="confirmation-content">
+          <i
+            className="pi pi-exclamation-triangle mr-3"
+            style={{ fontSize: "2rem" }}
+          />
+          {selectedSubTasks && (
+            <span>Are you sure you want to delete the selected products?</span>
+          )}
+        </div>
+      </Dialog>
+    </div>
   );
 };
 

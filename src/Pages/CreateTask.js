@@ -8,11 +8,31 @@ import { useState, useEffect } from "react";
 const CreateNewTask = ({ tasksFromDb, subTasksListsFromDb }) => {
   const [subjectsList, setSubjectsList] = useState(null);
 
-  const [subTasks, setSubTasks] = useState(null);
+  const [subTasks, setSubTasks] = useState([]);
 
-  const addTaskToDb = () => {
+  const addTaskToDb = async () => {
     console.log(task);
+    console.log(subTasks);
     //data to be pushed on db
+
+    const response = await fetch(
+      process.env.REACT_APP_BASE_URL_POST + "/newtask",
+      {
+        method: "POST", // *GET, POST, PUT, DELETE, etc.
+        mode: "cors", // no-cors, *cors, same-origin
+        headers: {
+          "Content-Type": "application/json",
+          // 'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: JSON.stringify({
+          taskDets: task,
+          subTasks: subTasks,
+        }), // body data type must match "Content-Type" header
+      }
+    );
+
+    console.log(response);
+    return response;
   };
 
   const [task, setTask] = useState({
@@ -34,15 +54,15 @@ const CreateNewTask = ({ tasksFromDb, subTasksListsFromDb }) => {
       });
   }, []);
 
-  useEffect(() => {
-    fetch(
-      "http://localhost:3000/get/subtask/34c8e55e-7312-426c-87b1-030beeb796b4"
-    )
-      .then((res) => res.json())
-      .then((dataX) => {
-        setSubTasks(dataX);
-      });
-  }, []);
+  // useEffect(() => {
+  //   fetch(
+  //     "http://localhost:3000/get/subtask/34c8e55e-7312-426c-87b1-030beeb796b4"
+  //   )
+  //     .then((res) => res.json())
+  //     .then((dataX) => {
+  //       setSubTasks(dataX);
+  //     });
+  // }, []);
 
   useEffect(() => {
     if (tasksFromDb) {
