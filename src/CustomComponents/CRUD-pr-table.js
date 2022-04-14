@@ -17,8 +17,8 @@ import { v4 as uuidv4 } from "uuid";
 const DataTableCrudDemo = ({ subTasks, setSubTasks }) => {
   //creating subtask object for new subtask
   let emptySubTask = {
-    subtaskid: null,
-    taskid: null,
+    subtaskid: "",
+    taskid: "",
     subtask: "",
     desc: "",
     link: "",
@@ -86,14 +86,15 @@ const DataTableCrudDemo = ({ subTasks, setSubTasks }) => {
     setStDialog(false);
   };
 
-  const saveSubTask = () => {
+  const saveSubTask = async () => {
     setSubmitted(true);
 
     if (subTask.subtask.trim()) {
       let _sts = [...subTasks];
       let _subTask = { ...subTask };
+
       if (subTask.subtaskid) {
-        const index = findIndexById(subTask.subtaskid);
+        const index = await findIndexById(subTask.subtaskid);
 
         _sts[index] = _subTask;
         toast.current.show({
@@ -103,7 +104,8 @@ const DataTableCrudDemo = ({ subTasks, setSubTasks }) => {
           life: 3000,
         });
       } else {
-        subTask.subtaskid = createId();
+        _subTask.subtaskid = await createId();
+
         _sts.push(_subTask);
         toast.current.show({
           severity: "success",
@@ -125,8 +127,6 @@ const DataTableCrudDemo = ({ subTasks, setSubTasks }) => {
   };
 
   const deleteSelectedSts = () => {
-    console.log(subTasks);
-    console.log(selectedSubTasks);
     let _sts = subTasks.filter((val) => !selectedSubTasks.includes(val));
     setSubTasks(_sts);
     setDeleteStsDialog(false);
@@ -164,8 +164,6 @@ const DataTableCrudDemo = ({ subTasks, setSubTasks }) => {
   };
 
   const confirmDeleteSelected = () => {
-    console.log(subTasks);
-    console.log(selectedSubTasks);
     setDeleteStsDialog(true);
   };
 

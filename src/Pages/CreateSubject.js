@@ -70,7 +70,7 @@ const CreateSubject = () => {
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify(formData.id),
+          body: JSON.stringify(formData),
         }
       );
       await handleClear();

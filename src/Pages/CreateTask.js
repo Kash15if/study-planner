@@ -36,9 +36,9 @@ const CreateNewTask = ({ tasksFromDb, subTasksListsFromDb }) => {
   };
 
   const [task, setTask] = useState({
-    uid: "",
+    uid: "aab55780-6e20-11ec-9569-0ef4b0d5e5d1",
     completed: false,
-    precentComp: "",
+    precentComp: Math.random() * 100,
     subject: "",
     subid: "",
     task: "",

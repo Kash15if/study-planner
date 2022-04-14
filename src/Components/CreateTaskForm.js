@@ -101,13 +101,15 @@ export default function HelperTextMisaligned({
               name="subject"
               onChange={onSelectChange}
             >
-              <MenuItem value="">
+              <MenuItem value={null}>
                 <em>None</em>
               </MenuItem>
               {subjectsList &&
                 subjectsList.map((item) => {
                   return (
-                    <MenuItem value={item.subject}>{item.subject}</MenuItem>
+                    <MenuItem key={item.id} value={item}>
+                      {item.subject}
+                    </MenuItem>
                   );
                 })}
             </Select>
