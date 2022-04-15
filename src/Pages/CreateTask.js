@@ -31,6 +31,7 @@ const CreateNewTask = ({ tasksFromDb, subTasksListsFromDb }) => {
       }
     );
 
+    await setEmptyTaskAndSubTask();
     console.log(response);
     return response;
   };
@@ -63,6 +64,22 @@ const CreateNewTask = ({ tasksFromDb, subTasksListsFromDb }) => {
   //       setSubTasks(dataX);
   //     });
   // }, []);
+
+  const setEmptyTaskAndSubTask = () => {
+    setTask({
+      uid: "aab55780-6e20-11ec-9569-0ef4b0d5e5d1",
+      completed: false,
+      precentComp: Math.random() * 100,
+      subject: "",
+      subid: "",
+      task: "",
+      description: "",
+      fromdate: "",
+      todate: "",
+    });
+
+    setSubTasks([]);
+  };
 
   useEffect(() => {
     if (tasksFromDb) {

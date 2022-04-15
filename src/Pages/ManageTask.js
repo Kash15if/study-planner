@@ -40,10 +40,8 @@ const ManageTask = () => {
   };
 
   const handleClickOpen = (data) => {
-    setOpen(true);
-    console.log(open);
     setSelectedTask(data);
-    console.log(data);
+    setOpen(true);
   };
 
   const handleClose = () => {
@@ -125,6 +123,12 @@ const ManageTask = () => {
             </Grid>
           ))}
       </Grid>
+
+      {/* <CreateNewTask subjectsList={}
+  task={selectedTask}
+  setTask={}
+  addTaskToDb={}
+/> */}
     </div>
   );
 };

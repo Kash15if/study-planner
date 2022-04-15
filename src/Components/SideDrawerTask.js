@@ -10,8 +10,8 @@ import "../CSS/taskDets.css";
 // import CretateTask from "../Pages/CreateTask";
 
 const DrawerTask = (props) => {
-  const [task, setTask] = useState(null);
-  const [state, setState] = useState(null);
+  const [state, setState] = useState([null]);
+  const [subTasks, setSubTasks] = useState([]);
 
   const closeSidePanel = props.closePanel;
 
@@ -22,9 +22,18 @@ const DrawerTask = (props) => {
   }, [props.opener]);
 
   useEffect(() => {
-    setTask(props.taskData);
-  }, [props.taskData]);
+    if (props.taskData) {
+      const taskid = props.taskData.taskid;
+      const urlSTs = "http://localhost:3000/get/onetask/" + taskid;
 
+      fetch(urlSTs)
+        .then((res) => res.json())
+        .then((dataX) => {
+          console.log(dataX.subTasks);
+          setSubTasks(dataX.subTasks);
+        });
+    }
+  }, [props.taskData]);
   const closePanel = () => {
     closeSidePanel();
 
@@ -32,7 +41,7 @@ const DrawerTask = (props) => {
   };
 
   const columns = [
-    { field: "id", hide: true },
+    { field: "subtaskid", hide: true },
     {
       field: "subtask",
       headerName: "SubTask",
@@ -67,73 +76,6 @@ const DrawerTask = (props) => {
     },
   ];
 
-  const rows = [
-    { id: 1, subtask: "Snow", desc: "Jon", link: 35, comp: true },
-    { id: 2, subtask: "Snow", desc: "dvdddd dfd fefe", link: 35, comp: true },
-    {
-      id: 3,
-      subtask: "Snow",
-      desc: "fe fefe feads fvdvxczx axzc",
-      link: 35,
-      comp: false,
-    },
-    {
-      id: 4,
-      subtask: "Snow",
-      desc: "scse vrf xz vfap lad l ",
-      link: 35,
-      comp: true,
-    },
-
-    {
-      id: 5,
-      subtask: "",
-      desc: "scse vrf xz vfap lad l ",
-      link: 35,
-      comp: true,
-    },
-
-    {
-      id: 56,
-      subtask: "",
-      desc: "scse vrf xz vfap lad l ",
-      link: 35,
-      comp: true,
-    },
-
-    {
-      id: 7,
-      subtask: "",
-      desc: "scse vrf xz vfap lad l ",
-      link: 35,
-      comp: true,
-    },
-
-    {
-      id: 8,
-      subtask: "",
-      desc: "scse vrf xz vfap lad l ",
-      link: 35,
-      comp: true,
-    },
-
-    {
-      id: 9,
-      subtask: "",
-      desc: "scse vrf xz vfap lad l ",
-      link: 35,
-      comp: true,
-    },
-
-    {
-      id: 10,
-      subtask: "",
-      desc: "scse vrf xz vfap lad l ",
-      link: 35,
-      comp: true,
-    },
-  ];
-
   return (
     <div>
       <Box sx={{ padding: "1rem", height: "90vh" }}>
@@ -149,33 +91,33 @@ const DrawerTask = (props) => {
         >
           <CancelPresentationIcon fontSize="large" />
         </Button>
-        {task && (
+        {props.taskData && (
           <table>
             <tr>
               <th>Subject:</th>
-              <td>{task.subject}</td>
+              <td>{props.taskData.subject}</td>
             </tr>
             <tr>
               <th>Task:</th>
-              <td>{task.task}</td>
+              <td>{props.taskData.task}</td>
             </tr>
             <tr>
               <th>Description:</th>
-              <td>{task.desc}</td>
+              <td>{props.taskData.desc}</td>
             </tr>
             <tr>
               <th>Start Date:</th>
-              <td>{task.fromdate}</td>
+              <td>{props.taskData.fromdate}</td>
             </tr>
 
             <tr>
               <th>End Date:</th>
-              <td>{task.todate}</td>
+              <td>{props.taskData.deadline}</td>
             </tr>
           </table>
         )}
         <div style={{ marginTop: "3rem" }}>
-          <SortableTable rows={rows} columns={columns} idName="id" />
+          <SortableTable rows={subTasks} columns={columns} idName="subtaskid" />
         </div>
       </Box>
     </div>
