@@ -27,6 +27,7 @@ const ManageTask = () => {
   const [age, setAge] = useState("");
   const [open, setOpen] = useState(false);
   const [selectedTask, setSelectedTask] = useState(null);
+  const [subTasks, setSubTasks] = useState([]);
 
   const [allData, setAllData] = useState(null);
   const [dataForFilter, setDataForFilter] = useState(null);
@@ -47,6 +48,20 @@ const ManageTask = () => {
       });
   }, []);
 
+  useEffect(() => {
+    if (selectedTask) {
+      const taskid = selectedTask.id;
+      const urlSTs = "http://localhost:3000/get/onetask/" + taskid;
+
+      fetch(urlSTs)
+        .then((res) => res.json())
+        .then((dataX) => {
+          console.log(dataX.subTasks);
+          setSubTasks(dataX.subTasks);
+        });
+    }
+  }, [selectedTask]);
+
   const handleChange = (event) => {
     setAge(event.target.value);
   };
@@ -59,8 +74,9 @@ const ManageTask = () => {
   };
 
   const setTaskSelect = (event, value) => {
-    const _task = allData.filter((x) => {});
-    console.log(value);
+    // const _task = allData.filter((x) => {});
+    // console.log(value);
+    setSelectedTask(value);
   };
   const handleClose = () => {
     setOpen(false);
@@ -97,7 +113,9 @@ const ManageTask = () => {
 
       <Grid container spacing={1} justifyContent="space-around" mt={2}></Grid>
 
-      {selectedTask && <DataTableCrudDemo />}
+      {selectedTask && (
+        <DataTableCrudDemo subTasks={subTasks} setSubTasks={setSubTasks} />
+      )}
     </div>
   );
 };
