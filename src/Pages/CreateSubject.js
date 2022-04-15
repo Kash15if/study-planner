@@ -106,7 +106,10 @@ const CreateSubject = () => {
 
     console.log(response);
 
-    const alltasks = tabData.filter((row) => row.id !== formData.id);
+    const alltasks = await tabData.filter((row) => row.id !== formData.id);
+
+    setTabData(alltasks);
+
     await handleClear();
 
     return response.json();

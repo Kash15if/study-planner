@@ -83,9 +83,9 @@ const Dashboard = () => {
             data={[
               ["Task", "Value"],
               ["Completed", pieData[0]],
-              ["Not Started", pieData[1]],
-              ["In progress", pieData[2]],
-              ["Pending", pieData[3]],
+              ["In progress", pieData[1]],
+              ["Pending", pieData[2]],
+              ["Not Started", pieData[3]],
             ]}
             title="My Daily Activities"
           />

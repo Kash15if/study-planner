@@ -16,6 +16,7 @@ const PieChart = (props) => {
           height: "90%",
           width: "90%",
         },
+        colors: ["#00E676", "#29B6F6", "#F50057", "#FBC02D"],
         title: props.title,
         // Just add this option
         pieHole: 0.4,
