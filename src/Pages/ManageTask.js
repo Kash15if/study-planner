@@ -26,7 +26,8 @@ const ManageTask = () => {
   const [selectedTask, setSelectedTask] = useState(null);
   const [subjectsList, setSubjectsList] = useState(null);
 
-  const [allData, setAllData] = useState("");
+  const [allData, setAllData] = useState(null);
+  const [actualAllTask, setActualAllTask] = useState(null);
 
   useEffect(() => {
     fetch(process.env.REACT_APP_BASE_URL_GET + "/allsubject")
@@ -45,11 +46,22 @@ const ManageTask = () => {
       .then((res) => res.json())
       .then((dataX) => {
         setAllData(dataX);
+        setActualAllTask(dataX);
       });
   };
 
   const handleChange = (event) => {
-    setAge(event.target.value);
+    if (event.target.value) {
+      const { id, subject } = event.target.value;
+
+      const _filteredTasks = actualAllTask.filter((item) => {
+        return item.subject === subject;
+      });
+
+      setAllData(_filteredTasks);
+    } else {
+      setAllData(actualAllTask);
+    }
   };
 
   const handleClickOpen = (data) => {
@@ -206,7 +218,7 @@ const ManageTask = () => {
         <Grid container spacing={1} justifyContent="space-around" mt={2}>
           {allData &&
             allData.map((selectedRow) => (
-              <Grid item xs={12} md={4} sm={6}>
+              <Grid item xs={12} md={4} sm={6} key={selectedRow.taskid}>
                 <div onClick={() => handleClickOpen(selectedRow)}>
                   <ManageTaskCard taskData={selectedRow} />
                 </div>
