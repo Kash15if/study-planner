@@ -59,6 +59,7 @@ const ManageTask = () => {
   };
 
   const handleClose = () => {
+    setSelectedTask(null);
     setOpen(false);
   };
 
@@ -78,6 +79,33 @@ const ManageTask = () => {
 
     const response = await fetch(
       process.env.REACT_APP_BASE_URL_POST + "/updatetask",
+      {
+        method: "POST", // *GET, POST, PUT, DELETE, etc.
+        mode: "cors", // no-cors, *cors, same-origin
+        headers: {
+          "Content-Type": "application/json",
+          // 'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: JSON.stringify({
+          taskDets: selectedTask,
+        }), // body data type must match "Content-Type" header
+      }
+    );
+
+    if (response.status === 200) {
+      await getAllTaskFromDb();
+      await setOpen(false);
+      await setSelectedTask(null);
+    }
+    console.log(response);
+    return response;
+  };
+
+  const deleteTask = async () => {
+    console.log(selectedTask.taskid);
+
+    const response = await fetch(
+      process.env.REACT_APP_BASE_URL_POST + "/deltask",
       {
         method: "POST", // *GET, POST, PUT, DELETE, etc.
         mode: "cors", // no-cors, *cors, same-origin
@@ -127,6 +155,7 @@ const ManageTask = () => {
                 task={selectedTask}
                 setTask={setSelectedTask}
                 addTaskToDb={UpdateTaskToDb}
+                DeleteTaskBtn={deleteTask}
                 manage={true}
               />
             ) : (

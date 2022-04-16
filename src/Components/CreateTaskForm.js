@@ -20,6 +20,7 @@ export default function NewTaskForm({
   task,
   setTask,
   addTaskToDb,
+  DeleteTaskBtn,
   manage,
 }) {
   const onInputChange = (e) => {
@@ -176,6 +177,18 @@ export default function NewTaskForm({
             {manage ? "Update" : "Add"}
           </Button>
         </Grid>
+        {manage && (
+          <Grid item xs={12}>
+            <Button
+              variant="contained"
+              component="span"
+              size="large"
+              onClick={DeleteTaskBtn}
+            >
+              Delete
+            </Button>
+          </Grid>
+        )}
       </Grid>
 
       {/* </Grid>
