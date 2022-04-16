@@ -51,14 +51,24 @@ const ManageTask = () => {
   };
 
   const handleChange = (event) => {
-    if (event.target.value) {
-      const { id, subject } = event.target.value;
+    const data = event.target.value;
 
-      const _filteredTasks = actualAllTask.filter((item) => {
-        return item.subject === subject;
-      });
+    if (data) {
+      if (data.subject) {
+        const { id, subject } = data;
 
-      setAllData(_filteredTasks);
+        const _filteredTasks = actualAllTask.filter((item) => {
+          return item.subject === subject;
+        });
+
+        setAllData(_filteredTasks);
+      } else {
+        const _filteredTasks = allData.filter((item) => {
+          return item.task.includes(data);
+        });
+
+        setAllData(_filteredTasks);
+      }
     } else {
       setAllData(actualAllTask);
     }
@@ -140,6 +150,8 @@ const ManageTask = () => {
     return response;
   };
 
+  const onTaskTextChange = () => {};
+
   return (
     <div>
       {/* Dialog popup for Managing Task */}
@@ -208,7 +220,12 @@ const ManageTask = () => {
         </Grid>
 
         <Grid item xs={12} md={3} sm={5}>
-          <TextField id="outlined-basic" label="Outlined" variant="outlined" />
+          <TextField
+            id="outlined-basic"
+            label="Outlined"
+            variant="outlined"
+            onChange={handleChange}
+          />
         </Grid>
       </Grid>
 
