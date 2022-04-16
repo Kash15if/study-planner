@@ -24,22 +24,36 @@ const ManageTask = () => {
   const [age, setAge] = useState("");
   const [open, setOpen] = useState(false);
   const [selectedTask, setSelectedTask] = useState(null);
+  const [subjectsList, setSubjectsList] = useState(null);
 
   const [allData, setAllData] = useState("");
 
   useEffect(() => {
-    fetch("http://localhost:3000/get/alltask")
+    fetch(process.env.REACT_APP_BASE_URL_GET + "/allsubject")
+      .then((res) => res.json())
+      .then((dataX) => {
+        setSubjectsList(dataX);
+      });
+  }, []);
+
+  useEffect(() => {
+    getAllTaskFromDb();
+  }, []);
+
+  const getAllTaskFromDb = async () => {
+    await fetch("http://localhost:3000/get/alltask")
       .then((res) => res.json())
       .then((dataX) => {
         setAllData(dataX);
       });
-  }, []);
+  };
 
   const handleChange = (event) => {
     setAge(event.target.value);
   };
 
   const handleClickOpen = (data) => {
+    console.log(data);
     setSelectedTask(data);
     setOpen(true);
   };
@@ -57,6 +71,34 @@ const ManageTask = () => {
       }
     }
   }, [open]);
+
+  const UpdateTaskToDb = async () => {
+    console.log(selectedTask);
+    //data to be pushed on db
+
+    const response = await fetch(
+      process.env.REACT_APP_BASE_URL_POST + "/updatetask",
+      {
+        method: "POST", // *GET, POST, PUT, DELETE, etc.
+        mode: "cors", // no-cors, *cors, same-origin
+        headers: {
+          "Content-Type": "application/json",
+          // 'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: JSON.stringify({
+          taskDets: selectedTask,
+        }), // body data type must match "Content-Type" header
+      }
+    );
+
+    if (response.status === 200) {
+      await getAllTaskFromDb();
+      await setOpen(false);
+      await setSelectedTask(null);
+    }
+    console.log(response);
+    return response;
+  };
 
   return (
     <div>
@@ -79,7 +121,17 @@ const ManageTask = () => {
             ref={descriptionElementRef}
             tabIndex={-1}
           >
-            {selectedTask ? <ManageTaskForm /> : "Task Loading"}
+            {selectedTask ? (
+              <ManageTaskForm
+                subjectsList={subjectsList}
+                task={selectedTask}
+                setTask={setSelectedTask}
+                addTaskToDb={UpdateTaskToDb}
+                manage={true}
+              />
+            ) : (
+              "Task Loading"
+            )}
           </DialogContentText>
         </DialogContent>
         <DialogActions>
@@ -99,9 +151,17 @@ const ManageTask = () => {
               label="Subject"
               onChange={handleChange}
             >
-              <MenuItem value={"s1"}>S1</MenuItem>
-              <MenuItem value={"s2"}>S2</MenuItem>
-              <MenuItem value={"s3"}>S3</MenuItem>
+              <MenuItem value={null}>
+                <em>None</em>
+              </MenuItem>
+              {subjectsList &&
+                subjectsList.map((item) => {
+                  return (
+                    <MenuItem key={item.id} value={item}>
+                      {item.subject}
+                    </MenuItem>
+                  );
+                })}
             </Select>
           </FormControl>
         </Grid>
@@ -113,16 +173,18 @@ const ManageTask = () => {
 
       {/* search box code ends and Task component started */}
 
-      <Grid container spacing={1} justifyContent="space-around" mt={2}>
-        {allData &&
-          allData.map((selectedRow) => (
-            <Grid item xs={12} md={4} sm={6}>
-              <div onClick={() => handleClickOpen(selectedRow)}>
-                <ManageTaskCard taskData={selectedRow} />
-              </div>
-            </Grid>
-          ))}
-      </Grid>
+      {!selectedTask && (
+        <Grid container spacing={1} justifyContent="space-around" mt={2}>
+          {allData &&
+            allData.map((selectedRow) => (
+              <Grid item xs={12} md={4} sm={6}>
+                <div onClick={() => handleClickOpen(selectedRow)}>
+                  <ManageTaskCard taskData={selectedRow} />
+                </div>
+              </Grid>
+            ))}
+        </Grid>
+      )}
 
       {/* <CreateNewTask subjectsList={}
   task={selectedTask}

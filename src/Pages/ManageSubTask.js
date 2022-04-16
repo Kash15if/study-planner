@@ -82,6 +82,31 @@ const ManageTask = () => {
     setOpen(false);
   };
 
+  const handleUpdateSubtasks = async () => {
+    console.log(subTasks);
+    const response = await fetch(
+      process.env.REACT_APP_BASE_URL_POST + "updatesubtasks",
+      {
+        method: "POST", // *GET, POST, PUT, DELETE, etc.
+        mode: "cors", // no-cors, *cors, same-origin
+        headers: {
+          "Content-Type": "application/json",
+          // 'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: JSON.stringify({
+          id: selectedTask.id,
+          subTasks: subTasks,
+        }), // body data type must match "Content-Type" header
+      }
+    );
+
+    await setSelectedTask(null);
+    console.log(response);
+    return response;
+
+    console.log(subTasks);
+  };
+
   const descriptionElementRef = useRef(null);
   useEffect(() => {
     if (open) {
@@ -111,7 +136,13 @@ const ManageTask = () => {
 
       {/* search box code ends and Task component started */}
 
-      <Grid container spacing={1} justifyContent="space-around" mt={2}></Grid>
+      <Grid container spacing={1} justifyContent="space-around" mb={5}>
+        {selectedTask && (
+          <Button variant="contained" onClick={handleUpdateSubtasks}>
+            Update Task
+          </Button>
+        )}
+      </Grid>
 
       {selectedTask && (
         <DataTableCrudDemo subTasks={subTasks} setSubTasks={setSubTasks} />

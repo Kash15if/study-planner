@@ -15,11 +15,12 @@ import DesktopDatePicker from "@mui/lab/DesktopDatePicker";
 import SubTaskAcc from "../CustomComponents/SubTasksAccordian";
 import { constrainPoint } from "@fullcalendar/react";
 
-export default function HelperTextMisaligned({
+export default function NewTaskForm({
   subjectsList,
   task,
   setTask,
   addTaskToDb,
+  manage,
 }) {
   const onInputChange = (e) => {
     var { id, value } = e.target;
@@ -121,6 +122,7 @@ export default function HelperTextMisaligned({
             // helperText="Please enter your topic"
             id="task"
             label="Task"
+            defaultValue={manage ? task.task : ""}
             onChange={onInputChange}
           />
         </Grid>
@@ -129,6 +131,7 @@ export default function HelperTextMisaligned({
           <TextField
             id="description"
             fullWidth
+            defaultValue={manage ? task.desc : ""}
             label="Description"
             variant="outlined"
             onChange={onInputChange}
@@ -154,7 +157,7 @@ export default function HelperTextMisaligned({
               label="To Date"
               inputFormat="yyyy/MM/dd"
               minDate={new Date("2017-01-01")}
-              value={task.todate || new Date()}
+              value={task.deadline || new Date()}
               onChange={onToDateChange}
               renderInput={(params) => <TextField {...params} />}
             />
@@ -170,7 +173,7 @@ export default function HelperTextMisaligned({
             size="large"
             onClick={AddTaskBtn}
           >
-            Add
+            {manage ? "Update" : "Add"}
           </Button>
         </Grid>
       </Grid>

@@ -9,33 +9,6 @@ const CreateNewTask = ({ tasksFromDb, subTasksListsFromDb }) => {
   const [subjectsList, setSubjectsList] = useState(null);
 
   const [subTasks, setSubTasks] = useState([]);
-
-  const addTaskToDb = async () => {
-    console.log(task);
-    console.log(subTasks);
-    //data to be pushed on db
-
-    const response = await fetch(
-      process.env.REACT_APP_BASE_URL_POST + "/newtask",
-      {
-        method: "POST", // *GET, POST, PUT, DELETE, etc.
-        mode: "cors", // no-cors, *cors, same-origin
-        headers: {
-          "Content-Type": "application/json",
-          // 'Content-Type': 'application/x-www-form-urlencoded',
-        },
-        body: JSON.stringify({
-          taskDets: task,
-          subTasks: subTasks,
-        }), // body data type must match "Content-Type" header
-      }
-    );
-
-    await setEmptyTaskAndSubTask();
-    console.log(response);
-    return response;
-  };
-
   const [task, setTask] = useState({
     uid: "aab55780-6e20-11ec-9569-0ef4b0d5e5d1",
     completed: false,
@@ -65,6 +38,42 @@ const CreateNewTask = ({ tasksFromDb, subTasksListsFromDb }) => {
   //     });
   // }, []);
 
+  useEffect(() => {
+    if (tasksFromDb) {
+      setTask(tasksFromDb);
+    }
+
+    if (subTasksListsFromDb) {
+      setSubjectsList(subTasksListsFromDb);
+    }
+  }, []);
+
+  const addTaskToDb = async () => {
+    console.log(task);
+    console.log(subTasks);
+    //data to be pushed on db
+
+    const response = await fetch(
+      process.env.REACT_APP_BASE_URL_POST + "/newtask",
+      {
+        method: "POST", // *GET, POST, PUT, DELETE, etc.
+        mode: "cors", // no-cors, *cors, same-origin
+        headers: {
+          "Content-Type": "application/json",
+          // 'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: JSON.stringify({
+          taskDets: task,
+          subTasks: subTasks,
+        }), // body data type must match "Content-Type" header
+      }
+    );
+
+    await setEmptyTaskAndSubTask();
+    console.log(response);
+    return response;
+  };
+
   const setEmptyTaskAndSubTask = () => {
     setTask({
       uid: "aab55780-6e20-11ec-9569-0ef4b0d5e5d1",
@@ -80,16 +89,6 @@ const CreateNewTask = ({ tasksFromDb, subTasksListsFromDb }) => {
 
     setSubTasks([]);
   };
-
-  useEffect(() => {
-    if (tasksFromDb) {
-      setTask(tasksFromDb);
-    }
-
-    if (subTasksListsFromDb) {
-      setSubjectsList(subTasksListsFromDb);
-    }
-  }, []);
 
   return (
     <div>
