@@ -1,3 +1,7 @@
+//envoronment variables
+// REACT_APP_BASE_URL_GET= "http://localhost:3000/get/"
+//REACT_APP_BASE_URL_POST="http://localhost:3000/post/"
+
 import "./App.css";
 import { darkTheme } from "./Theme.js";
 import { ThemeProvider } from "@mui/material/styles";
