@@ -42,7 +42,7 @@ const ManageTask = () => {
   }, []);
 
   const getAllTaskFromDb = async () => {
-    await fetch("http://localhost:3000/get/alltask")
+    await fetch(process.env.REACT_APP_BASE_URL_GET + "/alltask")
       .then((res) => res.json())
       .then((dataX) => {
         setAllData(dataX);
