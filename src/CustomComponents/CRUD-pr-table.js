@@ -188,20 +188,15 @@ const DataTableCrudDemo = ({ subTasks, setSubTasks }) => {
 
       const importedData = data.map((d) => {
         d = d.split(",");
-        const processedData = cols.reduce((obj, c, i) => {
-          c =
-            c === "Status"
-              ? "inventoryStatus"
-              : c === "Reviews"
-              ? "rating"
-              : c.toLowerCase();
-          obj[c] = d[i].replace(/['"]+/g, "");
-          (c === "price" || c === "rating") && (obj[c] = parseFloat(obj[c]));
-          return obj;
-        }, {});
 
-        processedData["id"] = createId();
-        return processedData;
+        const thisRow = {};
+
+        cols.forEach((col, index) => {
+          thisRow[col] = d[index];
+        });
+
+        thisRow["id"] = createId();
+        return thisRow;
       });
 
       const _subTasks = [...subTasks, ...importedData];
@@ -333,12 +328,13 @@ const DataTableCrudDemo = ({ subTasks, setSubTasks }) => {
         <FileUpload
           mode="basic"
           name="demo[]"
+          customUpload={true}
           auto
-          url="https://primefaces.org/primereact/showcase/upload.php"
+          url="./upload"
           accept=".csv"
           chooseLabel="Import"
           className="mr-2 inline-block importCsvBtn"
-          onUpload={importCSV}
+          uploadHandler={importCSV}
         />
         <Button
           label="Export"
