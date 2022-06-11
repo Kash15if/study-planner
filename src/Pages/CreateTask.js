@@ -76,7 +76,7 @@ const CreateNewTask = ({ tasksFromDb, subTasksListsFromDb }) => {
 
   const setEmptyTaskAndSubTask = () => {
     setTask({
-      uid: "aab55780-6e20-11ec-9569-0ef4b0d5e5d1",
+      uid: "",
       completed: false,
       precentComp: Math.random() * 100,
       subject: "",
