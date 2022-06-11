@@ -51,7 +51,7 @@ const ManageTask = () => {
   useEffect(() => {
     if (selectedTask) {
       const taskid = selectedTask.id;
-      const urlSTs = "http://localhost:3000/get/onetask/" + taskid;
+      const urlSTs = process.env.REACT_APP_BASE_URL_GET + taskid;
 
       fetch(urlSTs)
         .then((res) => res.json())
