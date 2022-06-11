@@ -33,7 +33,7 @@ const ManageTask = () => {
   const [dataForFilter, setDataForFilter] = useState(null);
 
   useEffect(() => {
-    fetch("http://localhost:3000/get/alltask")
+    fetch(process.env.REACT_APP_BASE_URL_GET + "alltask")
       .then((res) => res.json())
       .then((dataX) => {
         const dataForFilter = dataX.map((items) => {
