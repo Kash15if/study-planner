@@ -9,6 +9,9 @@ import { Toolbar } from "primereact/toolbar";
 import { Dialog } from "primereact/dialog";
 import { InputText } from "primereact/inputtext";
 import { Checkbox } from "primereact/checkbox";
+
+import { InputSwitch } from "primereact/inputswitch";
+
 import "../CSS/DataTableDemo.css";
 
 //import uuid npm library
@@ -452,6 +455,11 @@ const DataTableCrudDemo = ({ subTasks, setSubTasks }) => {
             onChange={(e) => onInputChange(e, "link")}
             autoFocus
           />
+        </div>
+
+        <div className="field">
+          <h5>Completed </h5>
+          <InputSwitch checked={true} onChange={(e) => console.log("teue")} />
         </div>
       </Dialog>
 
