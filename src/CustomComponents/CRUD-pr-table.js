@@ -178,6 +178,14 @@ const DataTableCrudDemo = ({ subTasks, setSubTasks }) => {
     setSubTask(_subTask);
   };
 
+  const onToggleChange = (e, name) => {
+    const val = e.value;
+    let _subTask = { ...subTask };
+    _subTask[`${name}`] = val;
+
+    setSubTask(_subTask);
+  };
+
   const importCSV = (e) => {
     const file = e.files[0];
     const reader = new FileReader();
@@ -198,7 +206,7 @@ const DataTableCrudDemo = ({ subTasks, setSubTasks }) => {
           thisRow[col] = d[index];
         });
 
-        thisRow["id"] = createId();
+        thisRow.id = createId();
         return thisRow;
       });
 
@@ -459,7 +467,10 @@ const DataTableCrudDemo = ({ subTasks, setSubTasks }) => {
 
         <div className="field">
           <h5>Completed </h5>
-          <InputSwitch checked={true} onChange={(e) => console.log("teue")} />
+          <InputSwitch
+            checked={subTask.completed}
+            onChange={(e) => onToggleChange(e, "completed")}
+          />
         </div>
       </Dialog>
 
