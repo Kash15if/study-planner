@@ -222,7 +222,7 @@ const ManageTask = () => {
         <Grid item xs={12} md={3} sm={5}>
           <TextField
             id="outlined-basic"
-            label="Outlined"
+            label="Search Task"
             variant="outlined"
             onChange={handleChange}
           />

@@ -25,10 +25,7 @@ const Dashboard = () => {
         let calData = [];
 
         dataX.forEach((element) => {
-          calData.push({
-            title: element.task,
-            date: element.deadline,
-          });
+          calData.push(element);
           if (element.completed) {
             comp++;
           } else {
@@ -92,16 +89,14 @@ const Dashboard = () => {
         </Grid>
         <Grid item sm={7} xs={12}>
           <CalenderView
-            data={
-              calenderData
-              //   [
-              //   { title: "event 1", date: "2021-10-01" },
-              //   { title: "event 2", date: "2021-10-10" },
-              //   { title: "event 3", date: "2021-10-16" },
-              //   { title: "event 4", date: "2021-10-17" },
-              //   { title: "event 5", date: "2021-10-25" },
-              // ]
-            }
+            data={calenderData}
+            //   [
+            //   { title: "event 1", date: "2021-10-01" },
+            //   { title: "event 2", date: "2021-10-10" },
+            //   { title: "event 3", date: "2021-10-16" },
+            //   { title: "event 4", date: "2021-10-17" },
+            //   { title: "event 5", date: "2021-10-25" },
+            // ]
           />
         </Grid>
       </Grid>
