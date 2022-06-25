@@ -206,7 +206,11 @@ const DataTableCrudDemo = ({ subTasks, setSubTasks }) => {
           thisRow[col] = d[index];
         });
 
-        thisRow.id = createId();
+        thisRow.subtaskid = createId();
+
+        thisRow["completed"] = thisRow["completed"] === "true" ? true : false;
+
+        console.log(thisRow);
         return thisRow;
       });
 
